@@ -1,0 +1,443 @@
+comonent one
+import React, { useState, useEffect, useRef } from 'react';
+
+export default function WordConnectionGame() {
+  const [currentRelation, setCurrentRelation] = useState(0);
+  const [connections, setConnections] = useState([]);
+  const containerRef = useRef(null);
+  const topButtonsRef = useRef([]);
+  const bottomButtonRef = useRef(null);
+
+  const relationData = [
+    {
+      type: 'ANTONYM',
+      words: ['hot', 'fast', 'big', 'happy', 'light', 'old', 'good'],
+      matches: ['hot', 'fast', 'big']
+    },
+    {
+      type: 'SYNONYM',
+      words: ['quick', 'rapid', 'slow', 'fast', 'swift', 'delayed', 'speedy'],
+      matches: ['quick', 'rapid', 'fast', 'swift', 'speedy']
+    },
+    {
+      type: 'HOMOPHONE',
+      words: ['write', 'sea', 'son', 'bear', 'flour', 'peace', 'knight'],
+      matches: ['write', 'sea', 'son']
+    },
+    {
+      type: 'HOMONYM',
+      words: ['bat', 'bank', 'bark', 'chair', 'table', 'watch', 'light'],
+      matches: ['bat', 'bank', 'bark']
+    }
+  ];
+
+  const current = relationData[currentRelation];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentRelation((prev) => (prev + 1) % relationData.length);
+      setConnections([]);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [currentRelation]);
+
+  useEffect(() => {
+    const updateConnections = () => {
+      if (bottomButtonRef.current && topButtonsRef.current.length > 0) {
+        const bottomRect = bottomButtonRef.current.getBoundingClientRect();
+        const svgElement = containerRef.current?.querySelector('svg');
+        if (!svgElement) return;
+        
+        const svgRect = svgElement.getBoundingClientRect();
+        
+        const matchPositions = current.matches.map((word) => {
+          const wordIndex = current.words.indexOf(word);
+          const topButton = topButtonsRef.current[wordIndex];
+          if (!topButton) return null;
+          
+          const topRect = topButton.getBoundingClientRect();
+          return {
+            word,
+            x: topRect.left + topRect.width / 2 - svgRect.left,
+            y: topRect.bottom - svgRect.top
+          };
+        }).filter(Boolean);
+
+        const newConnections = [];
+        
+        // Create connections between close words
+        for (let i = 0; i < matchPositions.length; i++) {
+          for (let j = i + 1; j < matchPositions.length; j++) {
+            const dx = matchPositions[i].x - matchPositions[j].x;
+            const distance = Math.abs(dx);
+            
+            if (distance < 150) {
+              newConnections.push({
+                type: 'peer',
+                x1: matchPositions[i].x,
+                y1: matchPositions[i].y,
+                x2: matchPositions[j].x,
+                y2: matchPositions[j].y,
+                delay: i * 150
+              });
+            }
+          }
+        }
+
+        // Create connections from words to bottom label
+        matchPositions.forEach((pos, idx) => {
+          newConnections.push({
+            type: 'main',
+            x1: pos.x,
+            y1: pos.y,
+            x2: bottomRect.left + bottomRect.width / 2 - svgRect.left,
+            y2: bottomRect.top - svgRect.top,
+            delay: idx * 150 + 300
+          });
+        });
+        
+        setConnections(newConnections);
+      }
+    };
+
+    const timer = setTimeout(updateConnections, 500);
+    return () => clearTimeout(timer);
+  }, [currentRelation, current]);
+
+  const createCurvedPath = (x1, y1, x2, y2, type) => {
+    const midY = (y1 + y2) / 2;
+    const controlOffset = type === 'peer' ? 30 : 80;
+    const control1Y = y1 + controlOffset;
+    const control2Y = y2 - controlOffset;
+    
+    return `M ${x1} ${y1} C ${x1} ${control1Y}, ${x2} ${control2Y}, ${x2} ${y2}`;
+  };
+
+  return (
+    <div ref={containerRef} className="relative flex items-center justify-center min-h-screen bg-white p-8">
+      {/* Dot grid background */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #ddd 1px, transparent 1px)',
+          backgroundSize: '30px 30px'
+        }}
+      />
+
+      <div className="relative w-full max-w-3xl">
+        {/* SVG for connection lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible" style={{ zIndex: 10 }}>
+          {connections.map((conn, idx) => (
+            <path
+              key={idx}
+              d={createCurvedPath(conn.x1, conn.y1, conn.x2, conn.y2, conn.type)}
+              stroke={conn.type === 'peer' ? '#8b5cf6' : '#3b82f6'}
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="5,5"
+              style={{
+                animation: `fadeIn 0.5s ease-in ${conn.delay}ms forwards`,
+                opacity: 0
+              }}
+            />
+          ))}
+        </svg>
+
+        <style>
+          {`
+            @keyframes fadeIn {
+              to { opacity: 1; }
+            }
+          `}
+        </style>
+
+        {/* Top word buttons */}
+        <div className="relative flex justify-center gap-3 flex-wrap mb-32" style={{ zIndex: 20 }}>
+          {current.words.map((word, idx) => (
+            <button
+              key={idx}
+              ref={(el) => topButtonsRef.current[idx] = el}
+              className={`px-5 py-2 rounded-full border-2 font-mono text-sm transition-all duration-300 ${
+                current.matches.includes(word)
+                  ? 'border-blue-500 bg-blue-50 text-blue-700'
+                  : 'border-gray-300 bg-white text-gray-700'
+              }`}
+              style={{
+                boxShadow: current.matches.includes(word) ? '0 4px 12px rgba(59, 130, 246, 0.3)' : 'none'
+              }}
+            >
+              {word}
+            </button>
+          ))}
+        </div>
+
+        {/* Bottom relation button */}
+        <div className="relative flex justify-center" style={{ zIndex: 20 }}>
+          <button
+            ref={bottomButtonRef}
+            className="px-10 py-3 rounded-full border-2 border-black bg-white text-black font-mono text-base font-bold shadow-lg"
+          >
+            {current.type}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+component 2
+import React, { useState, useEffect, useRef } from 'react';
+
+export default function CursorTracker() {
+  const [mousePos, setMousePos] = useState({ x: 400, y: 250 });
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  const getRotation = (x, y) => {
+    const dx = mousePos.x - x;
+    const dy = mousePos.y - y;
+    // Calculate angle in degrees, pointing the arrow tip toward cursor
+    return Math.atan2(dy, dx) * (180 / Math.PI);
+  };
+
+  const arrows = [];
+  const rows = 8;
+  const cols = 12;
+  const containerWidth = 800;
+  const containerHeight = 500;
+
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      const x = (j + 1) * (containerWidth / (cols + 1));
+      const y = (i + 1) * (containerHeight / (rows + 1));
+      arrows.push({ x, y, id: `${i}-${j}` });
+    }
+  }
+
+  return (
+    <div className="flex items-center justify-center min-h-screen p-8">
+      <div 
+        ref={containerRef}
+        className="relative"
+        style={{
+          width: containerWidth,
+          height: containerHeight
+        }}
+      >
+        {/* Fade overlay at edges */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(255,255,255,1) 100%)'
+          }}
+        />
+
+        {/* Arrows */}
+        {arrows.map((arrow) => (
+          <div
+            key={arrow.id}
+            className="absolute transition-transform duration-75 ease-out"
+            style={{
+              left: arrow.x,
+              top: arrow.y,
+              transform: `translate(-50%, -50%) rotate(${getRotation(arrow.x, arrow.y)}deg)`,
+              fontSize: '24px',
+              fontFamily: 'monospace',
+              userSelect: 'none'
+            }}
+          >
+            →
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+and then the
+import React, { useState, useEffect } from 'react';
+
+export default function MathPillGame() {
+  const [currentEquation, setCurrentEquation] = useState(0);
+  const [animatingNumber, setAnimatingNumber] = useState(null);
+  const [shake, setShake] = useState(false);
+  const [usedNumbers, setUsedNumbers] = useState([]);
+  const [feedback, setFeedback] = useState(null);
+  const [clearing, setClearing] = useState(false);
+  const [fadeIn, setFadeIn] = useState(true);
+
+  const equations = [
+    { left: '55', operator: '+', answer: '26', correctValue: -29 },
+    { left: '12', operator: '×', answer: '48', correctValue: 4 },
+    { left: '100', operator: '÷', answer: '25', correctValue: 4 }
+  ];
+
+  const numbers = [-29, 15, -10, 4];
+
+  const current = equations[currentEquation];
+  const availableNumbers = numbers.filter(n => !usedNumbers.includes(n));
+
+  useEffect(() => {
+    if (availableNumbers.length === 0) return;
+
+    const timer = setTimeout(() => {
+      const randomNum = availableNumbers[Math.floor(Math.random() * availableNumbers.length)];
+      tryNumber(randomNum);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [currentEquation, usedNumbers]);
+
+  const tryNumber = (num) => {
+    setAnimatingNumber(num);
+    setUsedNumbers(prev => [...prev, num]);
+
+    setTimeout(() => {
+      if (num === current.correctValue) {
+        setFeedback('correct');
+        setTimeout(() => {
+          setAnimatingNumber(null);
+          setFeedback(null);
+          setUsedNumbers([]);
+          setCurrentEquation((prev) => (prev + 1) % equations.length);
+        }, 1500);
+      } else {
+        setFeedback('wrong');
+        setShake(true);
+        setTimeout(() => {
+          setShake(false);
+          setAnimatingNumber(null);
+          setFeedback(null);
+        }, 1200);
+      }
+    }, 800);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white p-8">
+      {/* Dot grid background */}
+      <div 
+        className="fixed inset-0"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #ddd 1px, transparent 1px)',
+          backgroundSize: '30px 30px',
+          zIndex: 0
+        }}
+      />
+
+      <div className="relative z-10">
+        {/* Equation pills */}
+        <div className="flex items-center justify-center gap-4 mb-16">
+          <div className="px-8 py-4 rounded-full border-2 border-gray-800 bg-white font-mono text-2xl font-bold">
+            {current.left}
+          </div>
+          
+          <div className="font-mono text-2xl font-bold text-gray-800">
+            {current.operator}
+          </div>
+          
+          <div 
+            className={`relative px-8 py-4 rounded-full border-2 font-mono text-2xl font-bold transition-all ${
+              shake ? 'animate-shake' : ''
+            } ${
+              feedback === 'correct' ? 'border-green-500 bg-green-100 text-green-700' :
+              feedback === 'wrong' ? 'border-red-500 bg-red-100 text-red-700 animate-flash' :
+              'border-blue-500 bg-blue-50'
+            }`}
+          >
+            {animatingNumber !== null ? animatingNumber : '?'}
+          </div>
+          
+          <div className="font-mono text-2xl font-bold text-gray-800">
+            =
+          </div>
+          
+          <div className="px-8 py-4 rounded-full border-2 border-gray-800 bg-white font-mono text-2xl font-bold">
+            {current.answer}
+          </div>
+        </div>
+
+        {/* Number options */}
+        <div className="flex flex-wrap justify-center gap-3 max-w-2xl">
+          {numbers.map((num, idx) => (
+            <div
+              key={idx}
+              className={`px-6 py-3 rounded-full border-2 border-gray-400 bg-gray-50 font-mono text-lg transition-all duration-300 ${
+                usedNumbers.includes(num) ? 'opacity-30' : 'opacity-100'
+              } ${
+                animatingNumber === num ? 'animate-fly-up' : ''
+              }`}
+            >
+              {num > 0 ? `+${num}` : num}
+            </div>
+          ))}
+        </div>
+
+        {/* Feedback text */}
+        {feedback && (
+          <div className={`mt-8 text-3xl font-bold font-mono ${
+            feedback === 'correct' ? 'text-green-600' : 'text-red-600'
+          }`}>
+            {feedback === 'correct' ? 'RIGHT ✓' : 'WRONG ✗'}
+          </div>
+        )}
+      </div>
+
+      <style jsx>{`
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(-10px); }
+          75% { transform: translateX(10px); }
+        }
+        
+        @keyframes flyUp {
+          0% { 
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: translateY(-200px) scale(1.2);
+            opacity: 0.7;
+          }
+          100% { 
+            transform: translateY(-200px) scale(1);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes flash {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.4; }
+        }
+        
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+        
+        .animate-fly-up {
+          animation: flyUp 0.8s ease-out forwards;
+        }
+        
+        .animate-flash {
+          animation: flash 0.3s ease-in-out 3;
+        }
+      `}</style>
+    </div>
+  );
+}
