@@ -147,6 +147,7 @@ export default function HomePage() {
     { name: "Mental Ability", icon: Lightbulb },
     { name: "Language", icon: Languages },
     { name: "Crafts", icon: Palette },
+    { name: "Test Prep", icon: BookOpen },
   ]
 
   const services = [
@@ -177,6 +178,13 @@ export default function HomePage() {
       description: "Choose your preferred mode",
       details:
         "Convenient learning options that fit your schedule and preferences. Our online classes use interactive platforms with real-time engagement, while offline classes provide traditional face-to-face instruction. Both modes maintain the same high-quality teaching standards and personalized attention.",
+    },
+    {
+      icon: GraduationCap,
+      title: "11+ Grammar School & A-Levels",
+      description: "Entrance & advanced level preparation",
+      details:
+        "Targeted preparation for 11+ grammar school entrance exams and A-Level coursework with focused practice, exam techniques and one-to-one coaching.",
     },
   ]
 
@@ -365,9 +373,10 @@ export default function HomePage() {
         href="https://wa.me/2347086621148"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg animate-pulse-glow transition-all duration-300 hover:scale-110"
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-3 rounded-md shadow-md transition-all duration-200 hover:scale-105 flex items-center justify-center"
+        aria-label="WhatsApp"
       >
-        <MessageCircle className="h-6 w-6" />
+        <MessageCircle className="h-5 w-5" />
       </a>
 
       <section id="home" className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 py-6 px-4">
@@ -383,12 +392,12 @@ export default function HomePage() {
               className="space-y-6"
             >
               <div className="flex items-center gap-4 min-w-0">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary/10 text-primary border border-primary/20 max-w-[220px] whitespace-nowrap">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-green-50 text-green-700 border border-green-200">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
                   </span>
-                  <span className="text-sm font-semibold truncate">Accepting New Students for 2026</span>
+                  <span className="text-sm font-semibold">Accepting New Students for 2026</span>
                 </div>
 
                 <div className="flex items-center gap-3 min-w-0 whitespace-nowrap">
@@ -399,18 +408,12 @@ export default function HomePage() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground truncate max-w-[160px]">Trusted by 100+ families</p>
+                  <p className="text-sm text-muted-foreground">Trusted by 100+ families</p>
                 </div>
               </div>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground text-balance leading-snug">
-                Unlock Your <br />
-                <span className="inline-block">
-                  <span className="text-foreground">your </span>
-                  <span style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>
-                    child's potential
-                  </span>
-                </span>
+                Unlock your <span style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>child's potential</span>
                 <br /> With Expert Tutors.
               </h1>
               <p className="text-base text-muted-foreground max-w-lg leading-normal">
@@ -479,19 +482,21 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((service, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedService(service)}
-                className="group w-full bg-card rounded-lg p-4 sm:p-5 h-28 sm:h-32 flex flex-col items-center justify-center text-center hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-pointer scroll-animate-scale overflow-hidden relative"
+                className="group w-full bg-card rounded-lg p-4 sm:p-5 h-32 sm:h-36 flex flex-row items-center gap-4 hover:bg-primary hover:text-primary-foreground transition-transform duration-200 transform hover:-translate-y-1 cursor-pointer scroll-animate-scale overflow-hidden relative"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="flex items-center justify-center bg-primary/10 rounded-full p-3 w-14 h-14 mb-3 transition-colors duration-200 group-hover:bg-primary">
+                <div className="flex items-center justify-center bg-primary/10 rounded-md p-3 w-12 h-12 transition-colors duration-200 group-hover:bg-primary">
                   <service.icon className="h-6 w-6 text-primary group-hover:text-white transition-colors duration-200" />
                 </div>
-                <div className="font-semibold text-base leading-snug">{service.title}</div>
-                <div className="text-sm text-muted-foreground mt-2">{service.description}</div>
+                <div className="text-left flex-1">
+                  <div className="font-semibold text-base leading-snug group-hover:text-white">{service.title}</div>
+                  <div className="text-sm text-muted-foreground mt-1 group-hover:text-white">{service.description}</div>
+                </div>
               </button>
             ))}
           </div>
@@ -551,8 +556,8 @@ export default function HomePage() {
       {selectedTutor && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedTutor(null)}>
           <motion.div initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.25 }} className="bg-card rounded-lg p-0 max-w-3xl w-full shadow-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <Card className="flex-row items-stretch !py-0 !gap-0">
-              <div className="w-32 md:w-40 h-40 md:h-auto overflow-hidden rounded-l-xl bg-gray-100 flex-shrink-0">
+            <Card className="flex flex-col md:flex-row items-stretch !py-0 !gap-0">
+              <div className="w-full h-44 md:w-32 md:h-auto overflow-hidden rounded-t-lg md:rounded-l-xl bg-gray-100 flex-shrink-0">
                 <img src={selectedTutor.image || '/placeholder.svg'} alt={selectedTutor.name} className="w-full h-full object-cover" />
               </div>
               <CardContent className="!px-6 !py-6 flex-1 flex flex-col">
@@ -666,11 +671,35 @@ export default function HomePage() {
 
       <section id="tutors" className="py-10 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-6 scroll-animate">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-3">Meet the Tutors</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Our experienced and certified educators dedicated to your child's success
-            </p>
+          <div className="-mx-4 px-4 grid lg:grid-cols-2 gap-8 items-start mb-6 scroll-animate">
+            <div className="flex items-start justify-start">
+              <Card className="w-full max-w-3xl hover-lift border-border group p-2.5 !gap-0 cursor-pointer flex flex-row items-stretch">
+                <div className="flex items-center justify-center px-2.5">
+                  <div className="w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden bg-gray-100">
+                    <img src="/bisilola-profile.jpeg" alt="Bisilola Umorem" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+                <CardContent className="!px-4 !py-2 md:!p-4 flex-1 flex flex-col h-40 md:h-48 text-left">
+                  <div className="flex flex-col justify-between h-full">
+                    <div>
+                      <h4 className="text-base text-muted-foreground mb-1">Meet our lead tutor</h4>
+                      <h3 className="text-4xl lg:text-5xl font-extrabold mb-2">Bisilola Umorem</h3>
+                      <p className="text-base text-muted-foreground mb-3">Experienced educator — profile and full description here.</p>
+                    </div>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">Lead Tutor</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="pt-2 h-72 md:h-80 flex flex-col justify-start">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 text-left">Meet the Tutors</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl flex-1">
+                Our experienced and certified educators dedicated to your child's success
+              </p>
+            </div>
           </div>
 
           <div className="-mx-4 px-4 overflow-x-auto scrollbar-hide pb-4">
