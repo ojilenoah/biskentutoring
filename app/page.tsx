@@ -36,10 +36,8 @@ import {
   Star,
 } from "lucide-react"
 import WordConnectionGame from "@/components/interactive/WordConnectionGame"
-import CursorTracker from "@/components/interactive/CursorTracker"
+// CursorTracker removed from hero rotation to avoid arrow card
 import MathPillGame from "@/components/interactive/MathPillGame"
-
-const HERO_COMPONENTS = [WordConnectionGame, MathPillGame, CursorTracker]
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -56,7 +54,7 @@ export default function HomePage() {
     { type: 'image', src: '/african-american-female-tutor-helping-teenagers-with-math.jpg', duration: 3000 },
     { type: 'component', Component: WordConnectionGame, duration: 7000 },
     { type: 'image', src: '/black-male-teacher-leading-group-study-session-teenagers.jpg', duration: 3000 },
-    { type: 'component', Component: CursorTracker, duration: 7000 },
+    // CursorTracker card removed
     { type: 'image', src: '/african-american-tutor-online-session-with-teenage-student.jpg', duration: 3000 },
     { type: 'component', Component: MathPillGame, duration: 7000 },
     { type: 'image', src: '/black-female-teacher-helping-teenager-with-science-homework.jpg', duration: 3000 },
@@ -116,13 +114,8 @@ export default function HomePage() {
     }
   }, [])
 
-  // small interactive hero components cycle (from Tutor-Website)
-  const [activeHeroComponent, setActiveHeroComponent] = useState(0)
-  const HeroComponent = HERO_COMPONENTS[activeHeroComponent]
-  useEffect(() => {
-    const interval = setInterval(() => setActiveHeroComponent((s) => (s + 1) % HERO_COMPONENTS.length), 5000)
-    return () => clearInterval(interval)
-  }, [])
+  // Note: hero items are driven by `heroItems` + `heroCardIndex` below so each item
+  // displays for its configured `duration` before advancing.
 
   const handleHeroCardClick = () => {
     setHeroCardIndex((prev) => (prev + 1) % heroItems.length)
@@ -323,7 +316,7 @@ export default function HomePage() {
                   {item.name}
                 </a>
               ))}
-              <Button size="sm" className="ml-4 h-10 px-4 rounded-full bg-primary hover:bg-primary/90 text-white" onClick={() => setIsEnrollOpen(true)}>
+              <Button size="sm" className="ml-4 h-10 px-4 rounded-md bg-primary hover:bg-primary/90 text-white" onClick={() => setIsEnrollOpen(true)}>
                 Enroll
               </Button>
             </div>
@@ -377,71 +370,71 @@ export default function HomePage() {
         <MessageCircle className="h-6 w-6" />
       </a>
 
-      <section id="home" className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 py-12 px-4">
+      <section id="home" className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10 py-6 px-4">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
 
             {/* Left Column - copy of Tutor-Website hero text, keep existing Enroll/Icons block below */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-8"
+              transition={{ duration: 0.45 }}
+              className="space-y-6"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary border border-primary/20">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                </span>
-                <span className="text-sm font-semibold">Accepting New Students for 2025</span>
+              <div className="flex items-center gap-4 min-w-0">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary/10 text-primary border border-primary/20 max-w-[220px] whitespace-nowrap">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-60"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                  </span>
+                  <span className="text-sm font-semibold truncate">Accepting New Students for 2026</span>
+                </div>
+
+                <div className="flex items-center gap-3 min-w-0 whitespace-nowrap">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-8 h-8 rounded-md bg-primary/20 border-2 border-background flex items-center justify-center">
+                        <Star className="h-4 w-4 text-primary fill-current" />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate max-w-[160px]">Trusted by 100+ families</p>
+                </div>
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-foreground text-balance">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground text-balance leading-snug">
                 Unlock Your <br />
-                <span className="text-gradient">Potential</span> With <br />
-                Expert Tutors.
+                <span className="inline-block">
+                  <span className="text-foreground">your </span>
+                  <span style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>
+                    child's potential
+                  </span>
+                </span>
+                <br /> With Expert Tutors.
               </h1>
-
-              <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
+              <p className="text-base text-muted-foreground max-w-lg leading-normal">
                 Personalized 1-on-1 tutoring that builds confidence and delivers results. Trusted by over 100+ families for excellence in education.
               </p>
 
-              {/* Keep the existing CTA buttons (Call / Email) from the current project */}
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  onClick={() => window.open("tel:+2347086621148", "_self")}
-                  size="lg"
-                  className="h-14 px-8 text-lg rounded-full bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20"
-                >
-                  Call Now
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-14 px-8 text-lg rounded-full border-2 hover:bg-secondary"
-                  onClick={() => window.open("mailto:biskentutoring@gmail.com", "_self")}
-                >
-                  <Mail className="mr-2 w-5 h-5" /> Email Us
+              {/* CTA row: split pill (Call / Email) and Enroll next to it (compact) */}
+              <div className="flex items-center gap-3 w-full flex-nowrap">
+                <div className="flex items-center bg-primary text-white rounded-md overflow-hidden shadow-sm">
+                  <button onClick={() => window.open("tel:+2347086621148", "_self")} className="px-3 py-1.5 text-sm bg-primary hover:bg-primary/95">
+                    Call Now
+                  </button>
+                  <div className="w-px bg-white/20" />
+                  <button onClick={() => window.open("mailto:biskentutoring@gmail.com", "_self")} className="px-3 py-1.5 text-sm bg-primary/95 hover:bg-primary flex items-center">
+                    <Mail className="mr-2 w-4 h-4 inline" /> Email Us
+                  </button>
+                </div>
+
+                <Button size="lg" className="h-9 px-3 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 ml-2" onClick={() => setIsEnrollOpen(true)}>
+                  Enroll Now
                 </Button>
               </div>
 
-              {/* Preserve trusted icons + enroll small button appearance exactly as before */}
-              <div className="flex items-center gap-4 pt-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-primary/20 border-2 border-background flex items-center justify-center">
-                      <Star className="h-4 w-4 text-primary fill-current" />
-                    </div>
-                  ))}
-                </div>
-                <div className="flex items-center gap-3">
-                  <p className="text-sm text-muted-foreground">Trusted by 100+ families</p>
-                  <Button size="sm" className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md shadow-sm" onClick={() => setIsEnrollOpen(true)}>
-                    Enroll Now
-                  </Button>
-                </div>
-              </div>
+              
             </motion.div>
 
             {/* Right Column - interactive hero components (Tutor-Website style) */}
@@ -451,17 +444,24 @@ export default function HomePage() {
               transition={{ duration: 0.8 }}
               className="relative h-[400px] lg:h-[500px] w-full"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-[2rem] transform rotate-3 scale-95 blur-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent rounded-[2rem] opacity-60 transform blur-sm" />
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={activeHeroComponent}
+                  key={heroCardIndex}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="relative w-full h-full bg-white rounded-[2rem] border-4 border-white shadow-2xl overflow-hidden"
+                  className="relative w-full h-full bg-white rounded-[2rem] border-4 border-white shadow-lg overflow-hidden"
                 >
-                  <HeroComponent />
+                  {(() => {
+                    const current = heroItems[heroCardIndex] || heroItems[0]
+                    if (current.type === 'image') {
+                      return <img src={current.src} alt="hero" className="w-full h-full object-cover" />
+                    }
+                    const Component = current.Component
+                    return Component ? <Component /> : null
+                  })()}
                 </motion.div>
               </AnimatePresence>
             </motion.div>
@@ -479,12 +479,12 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {services.map((service, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedService(service)}
-                className="group aspect-square w-full bg-card rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-pointer scroll-animate-scale"
+                className="group w-full bg-card rounded-lg p-4 sm:p-5 h-28 sm:h-32 flex flex-col items-center justify-center text-center hover:bg-primary hover:text-primary-foreground transition-all duration-200 cursor-pointer scroll-animate-scale overflow-hidden relative"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <div className="flex items-center justify-center bg-primary/10 rounded-full p-3 w-14 h-14 mb-3 transition-colors duration-200 group-hover:bg-primary">
@@ -550,27 +550,22 @@ export default function HomePage() {
       {/* Tutor Modal */}
       {selectedTutor && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedTutor(null)}>
-          <div className="bg-card rounded-lg p-6 max-w-xl w-full shadow-xl" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-start gap-4">
-              <div className="w-28 h-28 overflow-hidden rounded-lg flex-shrink-0">
+          <motion.div initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.25 }} className="bg-card rounded-lg p-0 max-w-3xl w-full shadow-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <Card className="flex-row items-stretch !py-0 !gap-0">
+              <div className="w-32 md:w-40 h-40 md:h-auto overflow-hidden rounded-l-xl bg-gray-100 flex-shrink-0">
                 <img src={selectedTutor.image || '/placeholder.svg'} alt={selectedTutor.name} className="w-full h-full object-cover" />
               </div>
-              <div className="flex-1">
+              <CardContent className="!px-6 !py-6 flex-1 flex flex-col">
                 <h3 className="text-2xl font-bold mb-2">{selectedTutor.name}</h3>
-                <div className="flex flex-wrap gap-2 mb-3">
+                <p className="text-muted-foreground text-sm mb-4">{selectedTutor.description}</p>
+                <div className="mt-auto flex flex-wrap gap-2">
                   {(selectedTutor.tags || []).map((t: string, i: number) => (
-                    <span key={i} className="text-xs text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">{t}</span>
+                    <span key={i} className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">{t}</span>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">{selectedTutor.description}</p>
-                <div className="flex gap-3">
-                  <a href={`tel:+2347086621148`} className="bg-primary text-primary-foreground px-3 py-2 rounded-md">Call</a>
-                  <a href={`mailto:biskentutoring@gmail.com?subject=Enquiry about ${encodeURIComponent(selectedTutor.name)}`} className="border border-border px-3 py-2 rounded-md">Email</a>
-                  <button onClick={() => { setIsEnrollOpen(true); }} className="ml-auto bg-emerald-600 text-white px-3 py-2 rounded-md">Enroll with this tutor</button>
-                </div>
-              </div>
-            </div>
-          </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       )}
 
@@ -683,31 +678,38 @@ export default function HomePage() {
               {tutors.map((tutor, index) => {
                 const role = (tutor as any).role || (tutor.tags && tutor.tags[0]) || "Tutor"
                 return (
-                <Card key={index} className="min-w-[300px] max-w-[300px] snap-center hover-lift border-border group" style={{ animationDelay: `${index * 0.06}s` }}>
-                    <div className="h-48 overflow-hidden rounded-t-xl bg-gray-100 relative">
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: index * 0.06 }}
+                  className="min-w-[320px] max-w-[360px] snap-center"
+                >
+                <Card
+                  onClick={() => setSelectedTutor(tutor)}
+                  className="min-w-[320px] max-w-[360px] hover-lift border-border group !py-0 !gap-0 cursor-pointer flex flex-row items-stretch h-44 md:h-52"
+                >
+                    <div className="w-28 md:w-36 h-44 md:h-52 overflow-hidden rounded-l-xl bg-gray-100 flex-shrink-0">
                       <img
                         src={(tutor as any).image || `https://ui-avatars.com/api/?name=${encodeURIComponent(tutor.name)}&background=6366f1&color=fff`}
                         alt={tutor.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover transition-transform duration-500"
                       />
-                      <div className="absolute top-4 right-4">
-                        <Badge variant="secondary" className="backdrop-blur-md bg-white/90">Top Rated</Badge>
-                      </div>
                     </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold mb-1">{tutor.name}</h3>
-                      <p className="text-primary font-medium text-sm mb-4">{role}</p>
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{tutor.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-6">
+                    <CardContent className="!px-4 !py-3 md:!p-4 flex-1 flex flex-col h-full">
+                      <div className="overflow-hidden">
+                        <h3 className="text-lg md:text-xl font-bold mb-1 truncate">{tutor.name}</h3>
+                        <p className="text-primary font-medium text-xs md:text-sm mb-2 truncate">{role}</p>
+                        <p className="text-muted-foreground text-sm mb-2 line-clamp-3">{tutor.description}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-1 mt-auto">
                         {(tutor.tags || []).slice(0,3).map((tag: string) => (
-                          <span key={tag} className="text-xs px-2 py-1 bg-secondary rounded-md text-secondary-foreground font-mono">{tag}</span>
+                          <span key={tag} className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">{tag}</span>
                         ))}
                       </div>
-                      <Button onClick={() => { setIsEnrollOpen(true); setSelectedTutor(tutor); }} className="w-full bg-primary/10 text-primary hover:bg-primary hover:text-white border border-primary/20">
-                        View Profile
-                      </Button>
                     </CardContent>
                   </Card>
+                </motion.div>
                 )
               })}
             </div>
@@ -794,7 +796,7 @@ export default function HomePage() {
       {/* Contact Section */}
       <section id="contact" className="py-8 px-4 bg-primary text-primary-foreground">
         <div className="container mx-auto max-w-4xl scroll-animate">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
             {/* Image Div - Reduced padding for larger image */}
             <div className="flex-shrink-0">
               <img
@@ -805,23 +807,23 @@ export default function HomePage() {
             </div>
 
             {/* Content Div - All text content beside the image */}
-            <div className="flex-1 text-center lg:text-left space-y-6">
+            <div className="flex-1 text-center lg:text-left space-y-6 flex flex-col justify-between md:min-h-[18rem] lg:min-h-[24rem]">
               <div className="space-y-4">
                 <h2 className="text-3xl lg:text-4xl font-bold">Ready to Get Started?</h2>
-                <h3 className="text-2xl lg:text-3xl font-bold">Bisilola Ajala</h3>
+                <h3 className="text-2xl lg:text-3xl font-bold">Bisilola Umorem</h3>
                 <p className="text-lg lg:text-xl opacity-90">BSc Ed | M.Ed | TRCN Certified</p>
                 <p className="opacity-80 text-base leading-relaxed">
                   Experienced educator dedicated to providing personalized learning experiences that help every child
                   reach their full potential through empathetic and effective teaching methods.
                 </p>
-                <p className="text-xl font-semibold opacity-90">Contact Bisilola Ajala today</p>
+                <p className="text-xl font-semibold opacity-90">Contact Bisilola Umorem today</p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
                     href="tel:+2347086621148"
-                    className="flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-primary hover:text-primary/90 p-4 rounded-lg transition-all duration-300 text-base flex-1 font-medium"
+                    className="flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-primary hover:text-primary/90 py-2 px-3 rounded-md transition-all duration-300 text-sm flex-1 font-medium"
                   >
                     <Phone className="h-5 w-5" />
                     <span>07086621148</span>
@@ -830,7 +832,7 @@ export default function HomePage() {
                     href="https://wa.me/2347086621148"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white p-4 rounded-lg transition-all duration-300 text-base flex-1 font-medium"
+                    className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-md transition-all duration-300 text-sm flex-1 font-medium"
                   >
                     <MessageCircle className="h-5 w-5" />
                     <span>WhatsApp</span>
@@ -840,7 +842,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-3">
                   <a
                     href="mailto:biskentutoring@gmail.com"
-                    className="flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-primary hover:text-primary/90 p-4 rounded-lg transition-all duration-300 flex-1 font-medium"
+                    className="flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-primary hover:text-primary/90 py-2 px-3 rounded-md transition-all duration-300 flex-1 font-medium"
                   >
                     <Mail className="h-5 w-5" />
                     <span className="truncate">biskentutoring@gmail.com</span>
@@ -850,7 +852,7 @@ export default function HomePage() {
                       navigator.clipboard.writeText("biskentutoring@gmail.com")
                       alert("Email copied to clipboard!")
                     }}
-                    className="bg-white/90 hover:bg-white text-primary hover:text-primary/90 p-4 rounded-lg transition-all duration-300"
+                    className="bg-white/90 hover:bg-white text-primary hover:text-primary/90 py-2 px-3 rounded-md transition-all duration-300"
                     title="Copy email"
                   >
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
