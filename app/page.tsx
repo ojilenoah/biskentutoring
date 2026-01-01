@@ -278,31 +278,46 @@ export default function HomePage() {
         "Ms. Mariam is an online tutor specializing in Mathematics and English for young learners. Her core strength lies in breaking complex topics into simple, engaging lessons that build confidence and deliver steady, measurable progress. She creates interactive learning experiences that keep young students motivated and curious.",
     },
     {
+      name: "Mabel",
+      image: "/tutors/image6.jpg",
+      tags: ["Mathematics", "Yorùbá"],
+      description:
+        "Mabel is a passionate Mathematics and Yorùbá tutor who helps learners build strong academic understanding and confidence. She breaks concepts down from simple to complex and supports students in understanding and speaking Yorùbá with ease through clear, patient instruction.",
+    },
+    {
       name: "Olajumoke Kolajo",
-      image: "/placeholder-dtdox.png",
-      tags: ["Primary", "GCSE English"],
+      image: "/tutors/image7.jpg",
+      tags: ["Mathematics", "English", "Science"],
       description:
         "Olajumoke Kolajo is a dedicated and patient teacher specializing in Mathematics, English, and Science for younger learners, with experience tutoring GCSE students in English Language. She delivers structured and supportive lessons that build confidence, deepen understanding, and promote strong exam readiness.",
     },
     {
-      name: "Zara Musa",
-      image: "/professional-african-female-teacher-with-whiteboar.jpg",
-      description: "Economics & Government studies, WASSCE preparation",
+      name: "Bright",
+      image: "/tutors/image8.jpg",
+      tags: ["Science"],
+      description:
+        "Bright is a dedicated tutor with a passion for empowering students to achieve academic success. Specializing in science subjects, he creates personalized learning plans tailored to diverse learning needs. His goal is to foster a supportive and engaging learning environment that promotes confidence and consistent academic growth.",
     },
     {
-      name: "Emeka Nwosu",
-      image: "/professional-african-male-teacher-mentoring-studen.jpg",
-      description: "Mathematics & Mental Ability, Common Entrance specialist",
+      name: "Ajala O. T.",
+      image: "/tutors/image9.jpg",
+      tags: ["Academic Support"],
+      description:
+        "Ajala O. T. supports learners through clear, well-structured lessons that build strong academic foundations. His teaching approach focuses on helping students develop confidence, deep understanding, and steady, measurable progress.",
     },
     {
-      name: "Aisha Bello",
-      image: "/placeholder-dtdox.png",
-      description: "Early childhood education, pre-school learning expert",
+      name: "Ms. Mopelola Dally",
+      image: "/tutors/image10.jpg",
+      tags: ["Early Years", "Reading"],
+      description:
+        "Ms. Mopelola Dally is an online tutor specializing in Early Years education, English, Yorùbá, Numeracy, and Reading. Her core strength lies in simplifying complex reading and writing tasks, making learning engaging and easy for young learners to understand.",
     },
     {
-      name: "Kofi Mensah",
-      image: "/professional-african-male-teacher-in-modern-classr.jpg",
-      description: "IELTS & SAT preparation, international examinations",
+      name: "Abibat",
+      image: "/tutors/image11.jpg",
+      tags: ["Mathematics", "Reading"],
+      description:
+        "Abibat is an Elementary Mathematics Tutor and Reading Specialist who is passionate about fostering a love of learning. She supports young learners in building strong numeracy and literacy skills through patient, encouraging, and engaging instruction.",
     },
   ]
 
@@ -391,13 +406,13 @@ export default function HomePage() {
               transition={{ duration: 0.45 }}
               className="space-y-6"
             >
-              <div className="flex items-center gap-4 min-w-0">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-green-50 text-green-700 border border-green-200">
-                  <span className="relative flex h-2 w-2">
+              <div className="flex items-center gap-4 min-w-0 md:order-0 order-4 flex-wrap">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-green-50 text-green-700 border border-green-200 truncate max-w-[65%] sm:max-w-[45%] md:max-w-none">
+                  <span className="relative flex h-2 w-2 flex-shrink-0">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-60"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
                   </span>
-                  <span className="text-sm font-semibold">Accepting New Students for 2026</span>
+                  <span className="text-sm font-semibold truncate">Accepting New Students for 2026</span>
                 </div>
 
                 <div className="flex items-center gap-3 min-w-0 whitespace-nowrap">
@@ -408,11 +423,11 @@ export default function HomePage() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground">Trusted by 100+ families</p>
+                  <p className="text-sm text-muted-foreground truncate max-w-[150px]">Trusted by 100+ families</p>
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground text-balance leading-snug">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground text-balance leading-tight">
                 Unlock your <span style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>child's potential</span>
                 <br /> With Expert Tutors.
               </h1>
@@ -555,15 +570,19 @@ export default function HomePage() {
       {/* Tutor Modal */}
       {selectedTutor && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedTutor(null)}>
-          <motion.div initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.25 }} className="bg-card rounded-lg p-0 max-w-3xl w-full shadow-xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <Card className="flex flex-col md:flex-row items-stretch !py-0 !gap-0">
-              <div className="w-full h-44 md:w-32 md:h-auto overflow-hidden rounded-t-lg md:rounded-l-xl bg-gray-100 flex-shrink-0">
-                <img src={selectedTutor.image || '/placeholder.svg'} alt={selectedTutor.name} className="w-full h-full object-cover" />
+          <motion.div initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.25 }} className="bg-card rounded-lg p-0 max-w-3xl w-full shadow-xl overflow-auto" onClick={(e) => e.stopPropagation()}>
+            <Card className="flex flex-row items-stretch !py-0 !gap-0">
+              <div className="flex-shrink-0 p-4 flex items-center">
+                <div className="w-44 h-44 md:w-56 md:h-56 rounded-lg overflow-hidden bg-gray-100">
+                  <img src={selectedTutor.image || '/placeholder.svg'} alt={selectedTutor.name} className="w-full h-full object-cover" />
+                </div>
               </div>
-              <CardContent className="!px-6 !py-6 flex-1 flex flex-col">
-                <h3 className="text-2xl font-bold mb-2">{selectedTutor.name}</h3>
-                <p className="text-muted-foreground text-sm mb-4">{selectedTutor.description}</p>
-                <div className="mt-auto flex flex-wrap gap-2">
+              <CardContent className="!px-6 !py-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-2xl font-bold mb-2">{selectedTutor.name}</h3>
+                  <p className="text-muted-foreground text-sm mb-4">{selectedTutor.description}</p>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
                   {(selectedTutor.tags || []).map((t: string, i: number) => (
                     <span key={i} className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">{t}</span>
                   ))}
@@ -673,28 +692,33 @@ export default function HomePage() {
         <div className="container mx-auto max-w-6xl">
           <div className="-mx-4 px-4 grid lg:grid-cols-2 gap-8 items-start mb-6 scroll-animate">
             <div className="flex items-start justify-start">
-              <Card className="w-full max-w-3xl hover-lift border-border group p-2.5 !gap-0 cursor-pointer flex flex-row items-stretch">
-                <div className="flex items-center justify-center px-2.5">
-                  <div className="w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden bg-gray-100">
+              <Card onClick={() => setSelectedTutor({
+                name: 'Bisilola Umoren',
+                image: '/bisilola-profile.jpeg',
+                tags: ['Lead Tutor', 'Education'],
+                description: `Bisilola Umoren is a Principal Education Officer with the Lagos State Universal Basic Education Board and a certified, experienced educationist with over a decade of professional practice. She is driven by a deep belief in the transformative power of education and is committed to creating meaningful, impactful learning experiences.
+\n\nHer career spans teaching, curriculum development, and educational leadership, shaping her approach to education as a powerful tool for empowerment and social change. She currently focuses on leveraging online platforms to mentor educators and guide learners in effective teaching practices and high-quality learning.
+\n\nBeyond the classroom, Bisilola is deeply committed to community development. She believes education goes beyond academic knowledge, fostering empathy, responsibility, and lifelong growth. She continues to inspire learners and educators through her dedication to excellence, mentorship, and impact.`
+              })} className="w-full max-w-[900px] hover-lift border-border group !py-0 !gap-0 cursor-pointer flex flex-row items-stretch">
+                <div className="flex items-center justify-center pl-2.5 pt-2.5 pb-2.5"> 
+                  <div className="w-44 h-44 md:w-56 md:h-56 rounded-lg overflow-hidden bg-gray-100">
                     <img src="/bisilola-profile.jpeg" alt="Bisilola Umorem" className="w-full h-full object-cover" />
                   </div>
                 </div>
-                <CardContent className="!px-4 !py-2 md:!p-4 flex-1 flex flex-col h-40 md:h-48 text-left">
-                  <div className="flex flex-col justify-between h-full">
-                    <div>
-                      <h4 className="text-base text-muted-foreground mb-1">Meet our lead tutor</h4>
-                      <h3 className="text-4xl lg:text-5xl font-extrabold mb-2">Bisilola Umorem</h3>
-                      <p className="text-base text-muted-foreground mb-3">Experienced educator — profile and full description here.</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      <span className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">Lead Tutor</span>
-                    </div>
+                <CardContent className="!px-6 !pt-2.5 !pb-2.5 !pl-2.5 md:!p-6 flex-1 flex flex-col h-44 md:h-56 text-left overflow-hidden">
+                  <div className="overflow-hidden">
+                    <h4 className="text-base text-muted-foreground mb-1">Meet our lead tutor</h4>
+                    <h3 className="text-4xl lg:text-5xl font-extrabold mb-2">Bisilola Umorem</h3>
+                    <p className="text-base text-muted-foreground mb-3 line-clamp-4">Experienced educator — profile and full description here.</p>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-auto">
+                    <span className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">Lead Tutor</span>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="pt-2 h-72 md:h-80 flex flex-col justify-start">
+            <div className="pt-2 h-44 md:h-56 flex flex-col justify-start">
               <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 text-left">Meet the Tutors</h2>
               <p className="text-lg text-muted-foreground max-w-2xl flex-1">
                 Our experienced and certified educators dedicated to your child's success
@@ -712,26 +736,29 @@ export default function HomePage() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.45, delay: index * 0.06 }}
-                  className="min-w-[320px] max-w-[360px] snap-center"
+                  className="min-w-[360px] max-w-[420px] snap-center"
                 >
                 <Card
                   onClick={() => setSelectedTutor(tutor)}
-                  className="min-w-[320px] max-w-[360px] hover-lift border-border group !py-0 !gap-0 cursor-pointer flex flex-row items-stretch h-44 md:h-52"
+                  className="min-w-[360px] max-w-[420px] hover-lift border-border group !py-0 !gap-0 cursor-pointer flex flex-row items-stretch h-44 md:h-52"
                 >
-                    <div className="w-28 md:w-36 h-44 md:h-52 overflow-hidden rounded-l-xl bg-gray-100 flex-shrink-0">
+                    <div className="w-32 md:w-40 h-44 md:h-52 overflow-hidden rounded-l-xl bg-gray-100 flex-shrink-0">
                       <img
                         src={(tutor as any).image || `https://ui-avatars.com/api/?name=${encodeURIComponent(tutor.name)}&background=6366f1&color=fff`}
                         alt={tutor.name}
                         className="w-full h-full object-cover transition-transform duration-500"
                       />
                     </div>
-                    <CardContent className="!px-4 !py-3 md:!p-4 flex-1 flex flex-col h-full">
-                      <div className="overflow-hidden">
-                        <h3 className="text-lg md:text-xl font-bold mb-1 truncate">{tutor.name}</h3>
-                        <p className="text-primary font-medium text-xs md:text-sm mb-2 truncate">{role}</p>
-                        <p className="text-muted-foreground text-sm mb-2 line-clamp-3">{tutor.description}</p>
-                      </div>
-                      <div className="flex flex-wrap gap-1 mt-auto">
+                    <CardContent className="!px-4 !py-3 md:!p-4 flex-1 flex flex-col h-full pb-4">
+                      <h3 className="text-lg md:text-xl font-bold mb-1 truncate">{tutor.name}</h3>
+                      <p className="text-primary font-medium text-xs md:text-sm mb-2 truncate">{role}</p>
+                      <p
+                        className="text-muted-foreground text-sm mb-2 flex-1"
+                        style={{ display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                      >
+                        {tutor.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1 mt-auto min-h-[28px]">
                         {(tutor.tags || []).slice(0,3).map((tag: string) => (
                           <span key={tag} className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">{tag}</span>
                         ))}
