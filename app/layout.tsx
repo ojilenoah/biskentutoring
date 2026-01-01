@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { montserrat, playfair } from "../lib/fonts"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
@@ -19,7 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${montserrat.variable} ${playfair.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`font-sans`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

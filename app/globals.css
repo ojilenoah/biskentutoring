@@ -123,7 +123,40 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden; /* Prevent horizontal scroll on page */
+    font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 600; /* Use semibold for Montserrat throughout the app */
+    letter-spacing: -0.01em; /* Slightly tighter tracking for Montserrat */
   }
+}
+
+/* Heading styles: use Playfair for prominent headings and hero text */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Utility class for hero/display titles */
+.display-font {
+  font-family: 'Playfair', Georgia, serif;
+  font-weight: 700;
+}
+
+/* Display italic utility for hero or emphasized headings */
+.display-font-italic {
+  font-family: 'Playfair', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* Section heading utility to explicitly force non-italic where needed */
+.section-heading {
+  font-style: normal;
 }
 
 /* Added custom animations for the tutoring website */

@@ -428,7 +428,7 @@ export default function HomePage() {
               </div>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground text-balance leading-tight">
-                Unlock your <span style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>child's potential</span>
+                Unlock your <span className="display-font-italic" style={{ color: '#7c3aed', textShadow: '0 0 4px rgba(124,58,237,0.45)' }}>child's potential</span>
                 <br /> With Expert Tutors.
               </h1>
               <p className="text-base text-muted-foreground max-w-lg leading-normal">
@@ -491,7 +491,7 @@ export default function HomePage() {
       <section id="services" className="py-8 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-6 scroll-animate">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-3">Our Services</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-3 section-heading">Our Services</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Comprehensive tutoring services designed to help your child excel
             </p>
@@ -602,7 +602,7 @@ export default function HomePage() {
       <section id="subjects" className="py-8 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-6 scroll-animate">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-3">Subjects We Teach</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-3 section-heading">Subjects We Teach</h2>
             <p className="text-xl text-muted-foreground">Comprehensive coverage across all academic areas</p>
           </div>
 
@@ -719,7 +719,7 @@ export default function HomePage() {
             </div>
 
             <div className="pt-2 h-44 md:h-56 flex flex-col justify-start">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 text-left">Meet the Tutors</h2>
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-3 text-left section-heading">Meet the Tutors</h2>
               <p className="text-lg text-muted-foreground max-w-2xl flex-1">
                 Our experienced and certified educators dedicated to your child's success
               </p>
@@ -776,7 +776,7 @@ export default function HomePage() {
       <section id="testimonials" className="py-8 px-4 bg-muted/20">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-6 scroll-animate">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-3">What Parents Say</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-3 section-heading">What Parents Say</h2>
             <p className="text-xl text-muted-foreground">Real testimonials from satisfied parents</p>
           </div>
 
@@ -865,7 +865,7 @@ export default function HomePage() {
             {/* Content Div - All text content beside the image */}
             <div className="flex-1 text-center lg:text-left space-y-6 flex flex-col justify-between md:min-h-[18rem] lg:min-h-[24rem]">
               <div className="space-y-4">
-                <h2 className="text-3xl lg:text-4xl font-bold">Ready to Get Started?</h2>
+                <h2 className="text-3xl lg:text-4xl font-bold section-heading">Ready to Get Started?</h2>
                 <h3 className="text-2xl lg:text-3xl font-bold">Bisilola Umorem</h3>
                 <p className="text-lg lg:text-xl opacity-90">BSc Ed | M.Ed | TRCN Certified</p>
                 <p className="opacity-80 text-base leading-relaxed">
