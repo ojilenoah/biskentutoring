@@ -61,7 +61,7 @@ export default function HomePage() {
   ]
 
   const specialImages = [
-    "/caring-black-female-teacher-helping-adhd-student.jpg",
+    "/caring-black-female-teacher-helping-learning-differences-student.jpg",
     "/african-american-male-tutor-one-on-one-with-teenager.jpg",
     "/black-female-teacher-using-hands-on-learning-methods.jpg",
     "/african-american-tutor-working-with-special-needs-student.jpg",
@@ -161,9 +161,9 @@ export default function HomePage() {
     {
       icon: GraduationCap,
       title: "Exam Preparation",
-      description: "SATs, SAT, IELTS, GCSE/IGCSE",
+      description: "SATs, SAT, IELTS, GCSE/IGCSE, 11+ grammar school & A-levels ",
       details:
-        "Specialized preparation for major standardized tests and international examinations. Our expert tutors provide targeted practice, test-taking strategies, and comprehensive review sessions to help students achieve their best possible scores on SATs, SAT, IELTS, GCSE, IGCSE, Common Entrance, BECE, WASSCE, and GCE examinations.",
+        "Specialized preparation for major standardized tests and international examinations. Our expert tutors provide targeted practice, test-taking strategies, and comprehensive review sessions to help students achieve their best possible scores on SATs, SAT, IELTS, GCSE, IGCSE, Common Entrance, BECE, WASSCE, and GCE examinations. We also provide targeted preparation for 11+ grammar school entrance exams and A-Level coursework with focused practice, exam techniques and one-to-one coaching.",
     },
     {
       icon: Users,
@@ -179,13 +179,7 @@ export default function HomePage() {
       details:
         "Convenient learning options that fit your schedule and preferences. Our online classes use interactive platforms with real-time engagement, while offline classes provide traditional face-to-face instruction. Both modes maintain the same high-quality teaching standards and personalized attention.",
     },
-    {
-      icon: GraduationCap,
-      title: "11+ Grammar School & A-Levels",
-      description: "Entrance & advanced level preparation",
-      details:
-        "Targeted preparation for 11+ grammar school entrance exams and A-Level coursework with focused practice, exam techniques and one-to-one coaching.",
-    },
+    
   ]
 
   const testimonials = [
@@ -245,7 +239,7 @@ export default function HomePage() {
     {
       name: "Oluwatosin Ojo",
       image: "/tutors/image1.jpg",
-      tags: ["Mathematics", "Science"],
+      tags: ["English", "Mathematics"],
       description:
         "Oluwatosin Ojo is an experienced and passionate educator with a strong commitment to helping students understand concepts clearly and build lasting confidence in their learning. She creates supportive learning environments where students feel encouraged to ask questions, think critically, and achieve steady academic progress.",
     },
@@ -287,7 +281,7 @@ export default function HomePage() {
     {
       name: "Olajumoke Kolajo",
       image: "/tutors/image7.jpg",
-      tags: ["Mathematics", "English", "Science"],
+      tags: ["GCSE English", "Mathematics", "Science"],
       description:
         "Olajumoke Kolajo is a dedicated and patient teacher specializing in Mathematics, English, and Science for younger learners, with experience tutoring GCSE students in English Language. She delivers structured and supportive lessons that build confidence, deepen understanding, and promote strong exam readiness.",
     },
@@ -327,11 +321,10 @@ export default function HomePage() {
       <nav className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
-              <GraduationCap className="h-8 w-8 text-primary" />
-              <span className="font-bold text-lg">biskentutoringconcepts</span>
-            </div>
-
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="h-8 w-8 text-primary" />
+                  <span className="font-bold text-lg">biskentutoringconcepts</span>
+                </div>
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-4">
               {navItems.map((item) => (
@@ -385,7 +378,7 @@ export default function HomePage() {
 
       {/* WhatsApp Floating Button */}
       <a
-        href="https://wa.me/2347086621148"
+        href="https://wa.me/2347067256623"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-3 rounded-md shadow-md transition-all duration-200 hover:scale-105 flex items-center justify-center"
@@ -438,7 +431,7 @@ export default function HomePage() {
               {/* CTA row: split pill (Call / Email) and Enroll next to it (compact) */}
               <div className="flex items-center gap-3 w-full flex-nowrap">
                 <div className="flex items-center bg-primary text-white rounded-md overflow-hidden shadow-sm">
-                  <button onClick={() => window.open("tel:+2347086621148", "_self")} className="px-3 py-1.5 text-sm bg-primary hover:bg-primary/95">
+                  <button onClick={() => window.open("tel:+2347067256623", "_self")} className="px-3 py-1.5 text-sm bg-primary hover:bg-primary/95">
                     Call Now
                   </button>
                   <div className="w-px bg-white/20" />
@@ -541,11 +534,11 @@ export default function HomePage() {
             <p className="text-muted-foreground mb-4">{selectedService.description}</p>
             <p className="text-sm leading-relaxed">{selectedService.details}</p>
             <div className="mt-6 flex gap-3">
-              <Button
+                  <Button
                 className="flex-1"
                 onClick={() => {
                   setSelectedService(null)
-                  window.open("tel:+2347086621148", "_self")
+                  window.open("tel:+2347067256623", "_self")
                 }}
               >
                 <Phone className="mr-2 h-4 w-4" />
@@ -556,7 +549,7 @@ export default function HomePage() {
                 className="flex-1 bg-transparent"
                 onClick={() => {
                   setSelectedService(null)
-                  window.open("https://wa.me/2347086621148", "_blank")
+                  window.open("https://wa.me/2347067256623", "_blank")
                 }}
               >
                 <MessageCircle className="mr-2 h-4 w-4" />
@@ -571,13 +564,13 @@ export default function HomePage() {
       {selectedTutor && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelectedTutor(null)}>
           <motion.div initial={{ scale: 0.98, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.25 }} className="bg-card rounded-lg p-0 max-w-3xl w-full shadow-xl overflow-auto" onClick={(e) => e.stopPropagation()}>
-            <Card className="flex flex-row items-stretch !py-0 !gap-0">
-              <div className="flex-shrink-0 p-4 flex items-center">
-                <div className="w-44 h-44 md:w-56 md:h-56 rounded-lg overflow-hidden bg-gray-100">
+            <Card className="flex flex-col md:flex-row items-stretch !py-0 !gap-0">
+              <div className="flex-shrink-0 w-full md:w-auto p-0 md:p-4 flex items-center">
+                <div className="w-full h-56 md:w-44 md:h-56 rounded-t-2xl md:rounded-lg overflow-hidden bg-gray-100">
                   <img src={selectedTutor.image || '/placeholder.svg'} alt={selectedTutor.name} className="w-full h-full object-cover" />
                 </div>
               </div>
-              <CardContent className="!px-6 !py-6 flex-1 flex flex-col justify-between">
+              <CardContent className="!px-6 !py-4 flex-1 flex flex-col justify-between">
                 <div>
                   <h3 className="text-2xl font-bold mb-2">{selectedTutor.name}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{selectedTutor.description}</p>
@@ -652,7 +645,7 @@ export default function HomePage() {
             <div className="space-y-6 scroll-animate-right">
               <h2 className="text-3xl lg:text-4xl font-bold">Specialized Support for Every Child</h2>
               <p className="text-lg text-muted-foreground">
-                We provide specialized support for children with <strong>ADHD and learning differences</strong>. Our
+                We provide specialized support for children with <strong>learning differences</strong>. Our
                 qualified teachers use evidence-based approaches to create supportive learning environments tailored to
                 each child's unique needs.
               </p>
@@ -708,8 +701,9 @@ export default function HomePage() {
                 <CardContent className="!px-6 !pt-2.5 !pb-2.5 !pl-2.5 md:!p-6 flex-1 flex flex-col h-44 md:h-56 text-left overflow-hidden">
                   <div className="overflow-hidden">
                     <h4 className="text-base text-muted-foreground mb-1">Meet our lead tutor</h4>
-                    <h3 className="text-4xl lg:text-5xl font-extrabold mb-2">Bisilola Umorem</h3>
-                    <p className="text-base text-muted-foreground mb-3 line-clamp-4">Experienced educator — profile and full description here.</p>
+                    <h3 className="text-4xl lg:text-5xl font-extrabold mb-2">Bisilola Umoren</h3>
+                    <p className="text-sm text-muted-foreground mb-1">BSc. Ed / M.Ed / MAID / TRCN certified / STAN member</p>
+                    <p className="text-base text-muted-foreground mb-3 line-clamp-4">Experience/profile — profile and full description here.</p>
                   </div>
                   <div className="flex flex-wrap gap-1 mt-auto">
                     <span className="text-xs px-2 py-0.5 bg-secondary rounded-md text-secondary-foreground font-mono">Lead Tutor</span>
@@ -853,39 +847,33 @@ export default function HomePage() {
       <section id="contact" className="py-8 px-4 bg-primary text-primary-foreground">
         <div className="container mx-auto max-w-4xl scroll-animate">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
-            {/* Image Div - Reduced padding for larger image */}
-            <div className="flex-shrink-0">
+            {/* Logo beside contact text and buttons (shows left on lg, above on small) */}
+            <div className="flex-shrink-0 flex items-center justify-center lg:justify-start">
               <img
-                src="/bisilola-profile.jpeg"
-                alt="Bisilola Ajala - Professional Tutor"
-                className="w-72 h-72 lg:w-96 lg:h-96 rounded-2xl object-cover shadow-2xl mx-auto"
+                src="/tutors/logo.jpg"
+                alt="biskentutoringconcepts logo"
+                className="w-36 h-36 lg:w-48 lg:h-48 rounded-2xl object-cover shadow-md"
               />
             </div>
 
-            {/* Content Div - All text content beside the image */}
-            <div className="flex-1 text-center lg:text-left space-y-6 flex flex-col justify-between md:min-h-[18rem] lg:min-h-[24rem]">
+            {/* Content Div - simple contact text */}
+            <div className="flex-1 text-center lg:text-left space-y-6 flex flex-col justify-center md:min-h-[12rem] lg:min-h-[16rem]">
               <div className="space-y-4">
-                <h2 className="text-3xl lg:text-4xl font-bold section-heading">Ready to Get Started?</h2>
-                <h3 className="text-2xl lg:text-3xl font-bold">Bisilola Umorem</h3>
-                <p className="text-lg lg:text-xl opacity-90">BSc Ed | M.Ed | TRCN Certified</p>
-                <p className="opacity-80 text-base leading-relaxed">
-                  Experienced educator dedicated to providing personalized learning experiences that help every child
-                  reach their full potential through empathetic and effective teaching methods.
-                </p>
-                <p className="text-xl font-semibold opacity-90">Contact Bisilola Umorem today</p>
+                <h2 className="text-3xl lg:text-4xl font-bold section-heading">Contact Us</h2>
+                <p className="text-lg lg:text-xl opacity-90">Reach out to us for enrollment, questions, or to schedule a trial session.</p>
               </div>
 
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <a
-                    href="tel:+2347086621148"
+                    href="tel:+2347067256623"
                     className="flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-primary hover:text-primary/90 py-2 px-3 rounded-md transition-all duration-300 text-sm flex-1 font-medium"
                   >
                     <Phone className="h-5 w-5" />
-                    <span>07086621148</span>
+                    <span>07067256623</span>
                   </a>
                   <a
-                    href="https://wa.me/2347086621148"
+                    href="https://wa.me/2347067256623"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 px-3 rounded-md transition-all duration-300 text-sm flex-1 font-medium"
