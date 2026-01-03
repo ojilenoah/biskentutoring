@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Form, FormField, FormControl, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -15,6 +15,7 @@ import { supabase } from "@/lib/supabaseClient"
 
 export default function EnrollModal({ onClose, tutorName }: Props) {
   const { toast } = useToast()
+  const [submitted, setSubmitted] = useState(false)
   const form = useForm<any>({ defaultValues: { name: "", email: "", phone: "", subject: tutorName || "", message: "" } })
 
   const onSubmit = async (data: any) => {
@@ -40,6 +41,9 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
           title: "Success!",
           description: "Your enrollment request has been submitted. We'll contact you soon!",
         })
+        setSubmitted(true)
+        form.reset()
+        // Don't close automatically
       }
     } catch (err) {
       console.error('Supabase error:', err)
@@ -54,96 +58,113 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
     const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0ASubject: ${data.subject}%0D%0AMessage: ${data.message}`
     const mailto = `mailto:biskentutoring@gmail.com?subject=Enrollment%20Request%20${encodeURIComponent(data.subject || "")}&body=${body}`
     window.open(mailto)
-    form.reset()
-    onClose()
   }
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open) onClose() }}>
       <DialogContent className="sm:max-w-[480px]">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-primary">Start Learning Today</DialogTitle>
-          <DialogDescription>
-            Fill out the form below and we'll match you with the perfect tutor within 24 hours.
-          </DialogDescription>
-        </DialogHeader>
-
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Full Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="John Doe" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="john@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+1234567890" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        {submitted ? (
+          <div className="text-center py-8">
+            <div className="mb-4">
+              <svg className="mx-auto h-12 w-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Message Sent!</h3>
+            <p className="text-gray-600 mb-6">
+              Your enrollment request has been submitted successfully. We'll be in touch soon!
+            </p>
+            <Button onClick={onClose} className="w-full">
+              Close
+            </Button>
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="text-2xl font-bold text-primary">Start Learning Today</DialogTitle>
+              <DialogDescription>
+                Fill out the form below and we'll match you with the perfect tutor within 24 hours.
+              </DialogDescription>
+            </DialogHeader>
 
-            <FormField
-              control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subject Needed</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g. Mathematics, Piano, SAT Prep" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="John Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Specific Goals (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder="My son needs help with Algebra 2..." className="resize-none" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="john@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone</FormLabel>
+                        <FormControl>
+                          <Input placeholder="+1234567890" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
-            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white mt-2">Submit Request</Button>
-          </form>
-        </Form>
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Subject Needed</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g. Mathematics, Piano, SAT Prep" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Specific Goals (Optional)</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="My son needs help with Algebra 2..." className="resize-none" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white mt-2">Submit Request</Button>
+              </form>
+            </Form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   )

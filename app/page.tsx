@@ -134,7 +134,7 @@ export default function HomePage() {
   const handleLogoMouseDown = () => {
     longPressTimer.current = setTimeout(() => {
       setIsAdminLoginOpen(true)
-    }, 5000) // 5 seconds
+    }, 3000) // 3 seconds
   }
 
   const handleLogoMouseUp = () => {
