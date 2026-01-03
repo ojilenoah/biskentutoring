@@ -10,10 +10,28 @@ import { Button } from "@/components/ui/button"
 
 type Props = { onClose: () => void; tutorName?: string }
 
+import { supabase } from "@/lib/supabaseClient"
+
 export default function EnrollModal({ onClose, tutorName }: Props) {
   const form = useForm<any>({ defaultValues: { name: "", email: "", phone: "", subject: tutorName || "", message: "" } })
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    try {
+      const { error } = await supabase.from('enrollments').insert([{ 
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message,
+      }])
+
+      if (error) {
+        console.error('Failed to save enrollment to Supabase:', error)
+      }
+    } catch (err) {
+      console.error('Supabase error:', err)
+    }
+
     const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0ASubject: ${data.subject}%0D%0AMessage: ${data.message}`
     const mailto = `mailto:biskentutoring@gmail.com?subject=Enrollment%20Request%20${encodeURIComponent(data.subject || "")}&body=${body}`
     window.open(mailto)
