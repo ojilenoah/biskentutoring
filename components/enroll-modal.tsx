@@ -7,12 +7,14 @@ import { Form, FormField, FormControl, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
 
 type Props = { onClose: () => void; tutorName?: string }
 
 import { supabase } from "@/lib/supabaseClient"
 
 export default function EnrollModal({ onClose, tutorName }: Props) {
+  const { toast } = useToast()
   const form = useForm<any>({ defaultValues: { name: "", email: "", phone: "", subject: tutorName || "", message: "" } })
 
   const onSubmit = async (data: any) => {
@@ -27,9 +29,26 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
 
       if (error) {
         console.error('Failed to save enrollment to Supabase:', error)
+        toast({
+          title: "Error",
+          description: "Failed to submit enrollment. Please try again.",
+          variant: "destructive",
+        })
+        return
+      } else {
+        toast({
+          title: "Success!",
+          description: "Your enrollment request has been submitted. We'll contact you soon!",
+        })
       }
     } catch (err) {
       console.error('Supabase error:', err)
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      })
+      return
     }
 
     const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0ASubject: ${data.subject}%0D%0AMessage: ${data.message}`

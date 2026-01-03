@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Biskentutoringconcepts Home and Online Tutoring - Certified Tutors for Your Child",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={`font-sans`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+        <Toaster />
       </body>
     </html>
   )

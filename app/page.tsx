@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import EnrollModal from "@/components/enroll-modal"
+import AdminLoginModal from "@/components/AdminLoginModal"
+import AdminMessagesModal from "@/components/AdminMessagesModal"
 import {
   MessageCircle,
   Phone,
@@ -45,10 +47,14 @@ export default function HomePage() {
   const [selectedService, setSelectedService] = useState<any>(null)
   const [selectedTutor, setSelectedTutor] = useState<any>(null)
   const [isEnrollOpen, setIsEnrollOpen] = useState(false)
+  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false)
+  const [isAdminMessagesOpen, setIsAdminMessagesOpen] = useState(false)
   const [heroCardIndex, setHeroCardIndex] = useState(0)
   const [specialCardIndex, setSpecialCardIndex] = useState(0)
   const observerRef = useRef<IntersectionObserver | null>(null)
   const testimonialRef = useRef<HTMLDivElement>(null)
+  const logoRef = useRef<HTMLSpanElement>(null)
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null)
 
   const heroItems: Array<any> = [
     { type: 'image', src: '/african-american-female-tutor-helping-teenagers-with-math.jpg', duration: 3000 },
@@ -123,6 +129,23 @@ export default function HomePage() {
 
   const handleSpecialCardClick = () => {
     setSpecialCardIndex((prev) => (prev + 1) % specialImages.length)
+  }
+
+  const handleLogoMouseDown = () => {
+    longPressTimer.current = setTimeout(() => {
+      setIsAdminLoginOpen(true)
+    }, 5000) // 5 seconds
+  }
+
+  const handleLogoMouseUp = () => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current)
+      longPressTimer.current = null
+    }
+  }
+
+  const handleLoginSuccess = () => {
+    setIsAdminMessagesOpen(true)
   }
 
   // Hero rotation: advance based on item duration (images shorter, interactive components longer)
@@ -323,7 +346,15 @@ export default function HomePage() {
           <div className="flex items-center justify-between h-16">
                 <div className="flex items-center gap-2">
                   <GraduationCap className="h-8 w-8 text-primary" />
-                  <span className="font-bold text-lg">biskentutoringconcepts</span>
+                  <span 
+                    ref={logoRef}
+                    className="font-bold text-lg cursor-pointer select-none"
+                    onMouseDown={handleLogoMouseDown}
+                    onMouseUp={handleLogoMouseUp}
+                    onMouseLeave={handleLogoMouseUp} // in case mouse leaves                    onTouchStart={handleLogoMouseDown}
+                    onTouchEnd={handleLogoMouseUp}                  >
+                    biskentutoringconcepts
+                  </span>
                 </div>
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-4">
@@ -923,6 +954,17 @@ export default function HomePage() {
           <p className="opacity-60">© 2025 biskentutoringconcepts. All rights reserved.</p>
         </div>
       </footer>
+
+      {/* Admin Modals */}
+      <AdminLoginModal 
+        open={isAdminLoginOpen} 
+        onOpenChange={setIsAdminLoginOpen} 
+        onLoginSuccess={handleLoginSuccess} 
+      />
+      <AdminMessagesModal 
+        open={isAdminMessagesOpen} 
+        onOpenChange={setIsAdminMessagesOpen} 
+      />
     </div>
   )
 }
