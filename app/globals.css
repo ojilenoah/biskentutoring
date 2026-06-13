@@ -4,26 +4,26 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated color tokens to royal purple theme matching the flyer */
-  --background: oklch(1 0 0); /* White background */
-  --foreground: oklch(0.3 0 0); /* Dark gray text */
-  --card: oklch(0.99 0.02 300); /* Light purple card background */
-  --card-foreground: oklch(0.3 0 0); /* Dark gray card text */
-  --popover: oklch(1 0 0); /* White popover */
-  --popover-foreground: oklch(0.3 0 0); /* Dark gray popover text */
-  --primary: oklch(0.5 0.25 300); /* Royal purple primary color */
-  --primary-foreground: oklch(1 0 0); /* White text on primary */
-  --secondary: oklch(0.7 0.15 320); /* Light purple accent color */
-  --secondary-foreground: oklch(1 0 0); /* White text on secondary */
-  --muted: oklch(0.98 0.01 300); /* Light muted background with purple tint */
-  --muted-foreground: oklch(0.5 0 0); /* Medium gray muted text */
-  --accent: oklch(0.6 0.2 280); /* Purple accent */
-  --accent-foreground: oklch(1 0 0); /* White accent text */
-  --destructive: oklch(0.6 0.2 25); /* Orange destructive */
-  --destructive-foreground: oklch(1 0 0); /* White destructive text */
-  --border: oklch(0.9 0.02 300); /* Light purple border */
-  --input: oklch(0.98 0.01 300); /* Light input background */
-  --ring: oklch(0.5 0.25 300 / 0.5); /* Purple ring with transparency */
+  /* Soft Aurora: warm cream base, royal purple primary, peach accent atmosphere */
+  --background: oklch(0.975 0.008 80); /* Warm cream (~#FAF6EF) */
+  --foreground: oklch(0.25 0.02 290); /* Deep aubergine-ink for warmth */
+  --card: oklch(0.99 0.005 80); /* Near-ivory card surface */
+  --card-foreground: oklch(0.25 0.02 290);
+  --popover: oklch(0.98 0.006 80);
+  --popover-foreground: oklch(0.25 0.02 290);
+  --primary: oklch(0.5 0.25 300); /* Royal purple */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.7 0.15 320); /* Soft mauve */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.955 0.012 70); /* Warm muted tone */
+  --muted-foreground: oklch(0.45 0.02 290);
+  --accent: oklch(0.78 0.12 50); /* Peach accent for aurora warmth */
+  --accent-foreground: oklch(0.25 0.05 290);
+  --destructive: oklch(0.6 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.91 0.012 80); /* Warm border */
+  --input: oklch(0.97 0.008 80);
+  --ring: oklch(0.5 0.25 300 / 0.5);
   --chart-1: oklch(0.5 0.25 300); /* Purple chart color */
   --chart-2: oklch(0.7 0.15 320); /* Light purple chart color */
   --chart-3: oklch(0.6 0.2 280); /* Purple accent chart color */
@@ -76,8 +76,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -122,41 +122,254 @@
   }
   body {
     @apply bg-background text-foreground;
-    overflow-x: hidden; /* Prevent horizontal scroll on page */
-    font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-weight: 600; /* Use semibold for Montserrat throughout the app */
-    letter-spacing: -0.01em; /* Slightly tighter tracking for Montserrat */
+    /* overflow-x: clip (not hidden) so position: sticky on the navbar isn't broken
+       by an ancestor establishing a scroll containing block. */
+    overflow-x: clip;
+    font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
   }
+  /* Ensure section content sits above the fixed aurora layers.
+     Exclude nav so Tailwind's `sticky top-0` keeps working. */
+  main, section, footer { position: relative; z-index: 2; }
+  nav { z-index: 40; }
 }
 
-/* Heading styles: use Playfair for prominent headings and hero text */
+/* Heading styles: Playfair Display for editorial elegance */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Playfair', Georgia, serif;
+  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
 }
 
-/* Utility class for hero/display titles */
 .display-font {
-  font-family: 'Playfair', Georgia, serif;
+  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
   font-weight: 700;
 }
 
-/* Display italic utility for hero or emphasized headings */
 .display-font-italic {
-  font-family: 'Playfair', Georgia, serif;
+  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
   font-style: italic;
   font-weight: 700;
 }
 
-/* Section heading utility to explicitly force non-italic where needed */
+/* Italic Playfair + bg-clip-text gets clipped on the LEFT (italic slant) and BOTTOM (descenders)
+   without breathing room. Give the span explicit space so the gradient mask covers the entire glyph. */
+.display-font-italic.bg-clip-text,
+.bg-clip-text {
+  display: inline-block;
+  padding: 0.05em 0.15em 0.2em 0.18em;
+  line-height: 1.2;
+  vertical-align: baseline;
+}
+
 .section-heading {
   font-style: normal;
+}
+
+/* Supporting / subtitle text — bold Montserrat for personality */
+.support-text {
+  font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+/* ---------------------------------------------------------------------------
+   AURORA AESTHETIC SYSTEM
+   --------------------------------------------------------------------------- */
+
+/* Layered elevation: purple-tinted ambient + neutral tight + inner highlight */
+.shadow-soft {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    0 1px 2px rgba(15, 12, 41, 0.04),
+    0 8px 24px -4px rgba(91, 33, 182, 0.10);
+}
+.shadow-soft-lg {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    0 2px 6px rgba(15, 12, 41, 0.05),
+    0 20px 48px -12px rgba(91, 33, 182, 0.18),
+    0 8px 16px -8px rgba(255, 153, 102, 0.08);
+}
+.shadow-aurora {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    0 4px 8px rgba(15, 12, 41, 0.04),
+    0 32px 64px -24px rgba(91, 33, 182, 0.28),
+    0 16px 32px -12px rgba(255, 153, 102, 0.12);
+}
+
+/* Full-page ambient aurora — fixed, no animation (static = cheap, no compositor work) */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Pre-baked gradient soup instead of two blurred radial layers */
+  background:
+    radial-gradient(60vw 60vw at 90% -10%, rgba(168, 85, 247, 0.22), transparent 55%),
+    radial-gradient(50vw 50vw at -10% 115%, rgba(251, 191, 96, 0.20), transparent 55%),
+    radial-gradient(40vw 40vw at 50% 50%, rgba(232, 121, 249, 0.10), transparent 60%);
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 24vw;
+  height: 24vw;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.45;
+  pointer-events: none;
+  will-change: auto;
+}
+.aurora-blob-peach {
+  background: radial-gradient(circle, rgba(255, 153, 102, 0.30), transparent 60%);
+}
+.aurora-blob-violet {
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.35), transparent 60%);
+}
+.aurora-blob-mauve {
+  background: radial-gradient(circle, rgba(232, 121, 249, 0.28), transparent 60%);
+}
+
+/* Animation classes intentionally kept as no-ops so existing markup doesn't break */
+.animate-drift { animation: none; }
+
+/* Grain overlay disabled for performance — SVG turbulence repaints on scroll */
+.grain-overlay { display: none; }
+
+/* Glass card — REAL frosted glass: backdrop-filter active, modest blur so it stays performant
+   even with 20+ tiles on screen. Translucent enough to see content warp behind. */
+.glass-card {
+  position: relative;
+  background: rgba(255, 252, 247, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    inset 0 -1px 0 0 rgba(91, 33, 182, 0.05),
+    0 1px 2px rgba(15, 12, 41, 0.03),
+    0 12px 32px -12px rgba(91, 33, 182, 0.14);
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms ease;
+}
+.glass-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(168, 85, 247, 0.3);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    0 2px 6px rgba(15, 12, 41, 0.04),
+    0 24px 48px -16px rgba(91, 33, 182, 0.24);
+}
+
+/* Deeper glass — heavier blur for modals + hero card. Only a few on screen. */
+.glass-card-deep {
+  background: rgba(255, 250, 244, 0.5);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    0 4px 12px rgba(15, 12, 41, 0.05),
+    0 24px 56px -16px rgba(91, 33, 182, 0.22);
+}
+
+/* Animated rotating conic gradient border for hero card */
+.gradient-border {
+  position: relative;
+  isolation: isolate;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(168, 85, 247, 0.6),
+    rgba(255, 153, 102, 0.5),
+    rgba(232, 121, 249, 0.55),
+    rgba(168, 85, 247, 0.6)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: spin-slow 12s linear infinite;
+  z-index: -1;
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+/* Section dividers removed — sections flow as one continuous surface */
+
+/* Magnetic-feel CTA: deeper press, bloom shadow */
+.btn-magnetic {
+  position: relative;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms ease;
+  box-shadow: 0 4px 12px -2px rgba(91, 33, 182, 0.35), 0 2px 4px rgba(91, 33, 182, 0.15);
+}
+.btn-magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px -4px rgba(91, 33, 182, 0.45), 0 4px 12px rgba(255, 153, 102, 0.20);
+}
+.btn-magnetic:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: 100ms;
+}
+
+/* Floating chip / pill — REAL glassmorphism; critical for the sticky nav since content
+   scrolls behind it and the user needs to see the warp. */
+.chip-glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.75), 0 4px 12px -4px rgba(91, 33, 182, 0.14);
+}
+
+/* Stronger glass pill for section eyebrows */
+.chip-glass-strong {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+    0 4px 12px -6px rgba(91, 33, 182, 0.16);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-scroll-infinite,
+  .animate-pulse-glow,
+  .animate-bounce-gentle,
+  .animate-gradient {
+    animation: none !important;
+  }
 }
 
 /* Added custom animations for the tutoring website */
@@ -274,7 +487,7 @@ h6 {
 }
 
 .animate-scroll-infinite {
-  animation: scroll-infinite 30s linear infinite;
+  animation: scroll-infinite 60s linear infinite;
 }
 
 .animate-scroll-infinite:hover {
@@ -610,7 +823,7 @@ html {
   width: 100%;
   overflow: hidden;
   position: relative;
-  padding: 2rem 0;
+  padding: 0.5rem 0;
   mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
   -webkit-mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
 }
@@ -624,25 +837,14 @@ html {
 }
 
 .testimonial-review-card {
-  width: 320px;
-  min-height: 200px;
+  width: 270px;
   flex-shrink: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: white;
-  border: 1px solid hsl(var(--border));
-  border-radius: 0.75rem;
-}
-
-.testimonial-review-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 /* Responsive adjustments for new testimonial cards */
 @media (max-width: 768px) {
   .testimonial-review-card {
-    width: 280px;
-    min-height: 180px;
+    width: 250px;
   }
 
   .testimonial-scroll-new {
@@ -650,14 +852,13 @@ html {
   }
 
   .testimonial-container-new {
-    padding: 1.5rem 0;
+    padding: 0.25rem 0;
   }
 }
 
 @media (max-width: 640px) {
   .testimonial-review-card {
-    width: 260px;
-    min-height: 170px;
+    width: 230px;
   }
 }
 

@@ -1,12 +1,11 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Copy, Mail, Phone } from "lucide-react"
-import { supabase } from "@/lib/supabaseClient"
 
 type Enrollment = {
   id: number
@@ -24,34 +23,9 @@ type Props = {
 }
 
 export default function AdminMessagesModal({ open, onOpenChange }: Props) {
-  const [enrollments, setEnrollments] = useState<Enrollment[]>([])
+  const [enrollments] = useState<Enrollment[]>([])
   const [selectedEnrollment, setSelectedEnrollment] = useState<Enrollment | null>(null)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    if (open) {
-      fetchEnrollments()
-    }
-  }, [open])
-
-  const fetchEnrollments = async () => {
-    setLoading(true)
-    try {
-      const { data, error } = await supabase
-        .from('enrollments')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-      if (error) {
-        console.error('Error fetching enrollments:', error)
-      } else {
-        setEnrollments(data || [])
-      }
-    } catch (err) {
-      console.error('Supabase error:', err)
-    }
-    setLoading(false)
-  }
+  const loading = false
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString()

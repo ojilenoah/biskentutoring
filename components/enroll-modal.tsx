@@ -11,53 +11,22 @@ import { useToast } from "@/components/ui/use-toast"
 
 type Props = { onClose: () => void; tutorName?: string }
 
-import { supabase } from "@/lib/supabaseClient"
-
 export default function EnrollModal({ onClose, tutorName }: Props) {
   const { toast } = useToast()
   const [submitted, setSubmitted] = useState(false)
   const form = useForm<any>({ defaultValues: { name: "", email: "", phone: "", subject: tutorName || "", message: "" } })
 
   const onSubmit = async (data: any) => {
-    try {
-      const { error } = await supabase.from('enrollments').insert([{ 
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        subject: data.subject,
-        message: data.message,
-      }])
-
-      if (error) {
-        console.error('Failed to save enrollment to Supabase:', error)
-        toast({
-          title: "Error",
-          description: "Failed to submit enrollment. Please try again.",
-          variant: "destructive",
-        })
-        return
-      } else {
-        toast({
-          title: "Success!",
-          description: "Your enrollment request has been submitted. We'll contact you soon!",
-        })
-        setSubmitted(true)
-        form.reset()
-        // Don't close automatically
-      }
-    } catch (err) {
-      console.error('Supabase error:', err)
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      })
-      return
-    }
-
     const body = `Name: ${data.name}%0D%0AEmail: ${data.email}%0D%0APhone: ${data.phone}%0D%0ASubject: ${data.subject}%0D%0AMessage: ${data.message}`
     const mailto = `mailto:biskentutoring@gmail.com?subject=Enrollment%20Request%20${encodeURIComponent(data.subject || "")}&body=${body}`
     window.open(mailto)
+
+    toast({
+      title: "Success!",
+      description: "Your enrollment request has been submitted. We'll contact you soon!",
+    })
+    setSubmitted(true)
+    form.reset()
   }
 
   return (
@@ -65,24 +34,28 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
       <DialogContent className="sm:max-w-[480px]">
         {submitted ? (
           <div className="text-center py-8">
-            <div className="mb-4">
-              <svg className="mx-auto h-12 w-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="mb-4 mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center ring-1 ring-emerald-200">
+              <svg className="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Message Sent!</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-xl font-bold text-foreground mb-2">Message sent</h3>
+            <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
               Your enrollment request has been submitted successfully. We'll be in touch soon!
             </p>
-            <Button onClick={onClose} className="w-full">
+            <Button onClick={onClose} className="w-full bg-gradient-to-br from-primary to-fuchsia-600 text-white btn-magnetic rounded-full border-0">
               Close
             </Button>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-primary">Start Learning Today</DialogTitle>
-              <DialogDescription>
+              <span className="inline-block px-3 py-1 text-[10px] font-medium tracking-[0.2em] uppercase rounded-full chip-glass text-primary mb-2 w-fit">Enrollment</span>
+              <DialogTitle className="text-3xl font-bold leading-tight">
+                Start learning{" "}
+                <span className="display-font-italic bg-gradient-to-r from-primary to-fuchsia-500 bg-clip-text text-transparent">today</span>
+              </DialogTitle>
+              <DialogDescription className="text-sm leading-relaxed">
                 Fill out the form below and we'll match you with the perfect tutor within 24 hours.
               </DialogDescription>
             </DialogHeader>
@@ -160,7 +133,9 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
                   )}
                 />
 
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white mt-2">Submit Request</Button>
+                <Button type="submit" className="w-full bg-gradient-to-br from-primary to-fuchsia-600 text-white btn-magnetic rounded-full border-0 mt-2 h-11">
+                  Submit Request
+                </Button>
               </form>
             </Form>
           </>
