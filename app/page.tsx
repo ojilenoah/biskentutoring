@@ -327,7 +327,7 @@ export default function HomePage() {
       image: "/tutors/image8.jpg",
       tags: ["Science"],
       description:
-        "Bright is a dedicated tutor with a passion for empowering students to achieve academic success. Specializing in science subjects, he creates personalized learning plans tailored to diverse learning needs. His goal is to foster a supportive and engaging learning environment that promotes confidence and consistent academic growth.",
+        "Bright is a dedicated tutor with a passion for empowering students to achieve academic success. Specializing in science subjects, she creates personalized learning plans tailored to diverse learning needs. Her goal is to foster a supportive and engaging learning environment that promotes confidence and consistent academic growth.",
     },
     {
       name: "Ajala O. T.",
