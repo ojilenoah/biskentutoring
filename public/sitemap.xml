@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://biskentutoring.com/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <mobile:mobile/>
+  </url>
+  
+  <!-- Tutoring Page -->
+  <url>
+    <loc>https://biskentutoring.com/tutoring</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Homepage Images -->
+  <url>
+    <loc>https://biskentutoring.com/</loc>
+    <image:image>
+      <image:loc>https://biskentutoring.com/tutors/logo.jpg</image:loc>
+      <image:title>Bisken Tutoring Concepts Logo</image:title>
+      <image:caption>Professional Tutoring Services - Nigeria's Leading Tutoring Company</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://biskentutoring.com/african-american-female-tutor-helping-teenagers-with-math.jpg</image:loc>
+      <image:title>Expert Tutor Helping Students with Mathematics</image:title>
+      <image:caption>Professional one-on-one tutoring services</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://biskentutoring.com/black-male-teacher-leading-group-study-session-teenagers.jpg</image:loc>
+      <image:title>Group Study Session with Certified Tutor</image:title>
+      <image:caption>Collaborative learning environment</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://biskentutoring.com/african-american-tutor-online-session-with-teenage-student.jpg</image:loc>
+      <image:title>Online Tutoring Session</image:title>
+      <image:caption>Flexible online learning with certified tutors</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://biskentutoring.com/black-female-teacher-helping-teenager-with-science-homework.jpg</image:loc>
+      <image:title>Science Tutoring Support</image:title>
+      <image:caption>Professional science education tutoring</image:caption>
+    </image:image>
+  </url>
+
+</urlset>
