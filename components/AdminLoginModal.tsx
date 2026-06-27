@@ -31,7 +31,7 @@ export default function AdminLoginModal({ open, onOpenChange, onLoginSuccess }: 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px]">
+      <DialogContent className="sm:max-w-[400px] !bg-white !backdrop-blur-none !shadow-xl border border-slate-200">
         <DialogHeader>
           <DialogTitle>Admin Login</DialogTitle>
         </DialogHeader>

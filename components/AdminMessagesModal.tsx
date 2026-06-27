@@ -43,7 +43,7 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange} modal={true}>
       <DialogContent 
-        className="sm:max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col"
+        className="sm:max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col !bg-white !backdrop-blur-none !shadow-xl border border-slate-200"
         onPointerDownOutside={(e) => e.preventDefault()}
         onInteractOutside={(e) => e.preventDefault()}
       >

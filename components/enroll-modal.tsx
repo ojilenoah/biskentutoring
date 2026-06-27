@@ -31,7 +31,7 @@ export default function EnrollModal({ onClose, tutorName }: Props) {
 
   return (
     <Dialog open={true} onOpenChange={(open) => { if (!open) onClose() }}>
-      <DialogContent className="sm:max-w-[480px]">
+      <DialogContent className="sm:max-w-[480px] !bg-white !backdrop-blur-none !shadow-xl border border-slate-200">
         {submitted ? (
           <div className="text-center py-8">
             <div className="mb-4 mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center ring-1 ring-emerald-200">
