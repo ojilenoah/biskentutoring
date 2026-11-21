@@ -149,8 +149,8 @@ export default function HomePage() {
         <section className="grain relative left-1/2 mt-12 w-screen -translate-x-1/2 bg-purple text-white">
           <div className="mx-auto grid grid-cols-1 max-w-[1320px] gap-6 px-4 py-8 sm:px-7 sm:py-12 lg:grid-cols-2">
           {/* clip only the bottom edge: kids rise out of it, and the tallest one breaks out over the top */}
-          <div className="relative mt-16 min-h-[320px] rounded-card bg-purple-2 [clip-path:inset(-900px_-60px_0_-60px_round_0_0_var(--radius-card)_var(--radius-card))] lg:mt-0 lg:min-h-[400px]">
-            <div className="pointer-events-none absolute inset-x-0 -bottom-10 flex items-end justify-center">
+          <div className="relative mt-16 h-[150px] rounded-card bg-purple-2 [clip-path:inset(-900px_-60px_0_-60px_round_0_0_var(--radius-card)_var(--radius-card))] lg:mt-0 lg:h-auto lg:min-h-[400px]">
+            <div className="pointer-events-none absolute inset-x-0 -bottom-[230px] flex items-end justify-center lg:-bottom-10">
               {HOW_KIDS.map((k, i) => (
                 <Drift
                   key={k.src}
