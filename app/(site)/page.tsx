@@ -217,18 +217,18 @@ export default function HomePage() {
         </section>
 
         {/* ================= CTA ================= */}
-        <section className="relative mb-2 mt-12 flex flex-col justify-center gap-6 rounded-panel bg-sunk grain p-6 pb-[280px] sm:p-10 sm:pb-[300px] md:mt-16 md:min-h-[290px] md:pb-10 md:pr-[300px] lg:min-h-[330px] lg:p-12 lg:pr-[340px]">
+        <section className="relative mb-2 mt-20 flex min-h-[280px] flex-col justify-between gap-6 rounded-panel bg-sunk grain p-5 sm:p-10 md:mt-16 md:min-h-[290px] md:justify-center md:pr-[300px] lg:min-h-[330px] lg:p-12 lg:pr-[340px]">
           {/* kid stands flush to the card's right edge; her head rises out above the top and
               her cut-off bottom always sits below the card's bottom edge, which clips it */}
           <div className="pointer-events-none absolute inset-0 [clip-path:inset(-600px_0_0_0_round_0_0_var(--radius-panel)_var(--radius-panel))]">
             <Drift className="absolute -bottom-10 right-0" distance={6} from={{ y: 60 }}>
-              <img src={CTA_KID.src} alt={CTA_KID.alt} className="block h-[300px] w-auto select-none md:h-[390px] lg:h-[440px]" draggable={false} />
+              <img src={CTA_KID.src} alt={CTA_KID.alt} className="block h-[380px] w-auto select-none md:h-[390px] lg:h-[440px]" draggable={false} />
             </Drift>
           </div>
-          <h2 className="relative text-[36px] sm:text-[52px]">
+          <h2 className="relative z-10 pr-[120px] text-[30px] sm:pr-[200px] sm:text-[44px] md:pr-0 md:text-[52px]">
             Let&apos;s start your child&apos;s <span className="text-purple">journey.</span>
           </h2>
-          <div className="relative flex gap-2">
+          <div className="relative z-10 flex gap-2">
             <Button asChild size="lg" className="flex-1 sm:flex-none">
               <Link href="/enroll">
                 Enroll now <ArrowRight />
