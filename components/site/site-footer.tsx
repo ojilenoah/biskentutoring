@@ -36,11 +36,11 @@ export function SiteFooter() {
     <footer className="bg-ink text-page/75">
       <div className="px-5 pb-7 pt-12 sm:px-10 lg:px-14">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-[1.4fr_repeat(3,minmax(0,1fr))]">
-          <div className="col-span-2 max-w-xs md:col-span-1">
-            <span className="inline-block rounded-card bg-card p-3">
+          <div className="col-span-2 flex max-w-md items-center gap-4 md:col-span-1">
+            <span className="inline-block shrink-0 rounded-card bg-card p-3">
               <LogoLockup className="w-24" />
             </span>
-            <p className="mt-4 text-sm leading-relaxed">Certified tutors, personalised learning and real progress — from pre-school to A-levels, at home or online.</p>
+            <p className="text-sm leading-relaxed">Certified tutors, personalised learning and real progress — from pre-school to A-levels, at home or online.</p>
           </div>
           {COLUMNS.map((col) => (
             <div key={col.title}>
