@@ -3,7 +3,16 @@ import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
+import { Montserrat } from "next/font/google"
+import { GeistMono } from "geist/font/mono"
 import { Toaster } from "@/components/ui/toaster"
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-montserrat",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Bisken Tutoring - Nigeria's Leading Tutoring Company | Home & Online Tutoring",
@@ -85,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${montserrat.variable} ${GeistMono.variable}`}>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -93,18 +102,8 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         
         {/* Theme Color */}
-        <meta name="theme-color" content="#5B21B6" />
+        <meta name="theme-color" content="#F3EADB" />
         <meta name="msapplication-TileColor" content="#5B21B6" />
-        
-        {/* Preconnect to external resources */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
-        {/* Google Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap"
-          rel="stylesheet"
-        />
         
         {/* Structured Data - Organization Schema */}
         <script
@@ -158,7 +157,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans`}>
+      <body>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
         <Toaster />

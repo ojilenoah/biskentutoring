@@ -31,12 +31,12 @@ export default function AdminLoginModal({ open, onOpenChange, onLoginSuccess }: 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px] !bg-white !backdrop-blur-none !shadow-xl border border-slate-200">
+      <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
           <DialogTitle>Admin Login</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="username">Username</Label>
             <Input
               id="username"
@@ -45,7 +45,7 @@ export default function AdminLoginModal({ open, onOpenChange, onLoginSuccess }: 
               placeholder="Enter username"
             />
           </div>
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
@@ -55,7 +55,7 @@ export default function AdminLoginModal({ open, onOpenChange, onLoginSuccess }: 
               placeholder="Enter password"
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-destructive text-sm font-medium">{error}</p>}
           <Button onClick={handleLogin} className="w-full">
             Login
           </Button>

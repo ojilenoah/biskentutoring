@@ -2,20 +2,29 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+/* Fields are a recessed fill with a faint inset edge; focus draws a purple ring. */
+export const fieldBase = [
+  'w-full min-w-0 rounded-control bg-page px-3.5 text-[15px] text-ink',
+  'shadow-[inset_0_0_0_1px_rgb(23_17_31/0.1)] placeholder:text-ink-3/80',
+  'transition-shadow duration-150 outline-none',
+  'focus-visible:shadow-[inset_0_0_0_2px_var(--purple)]',
+  'disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+  'aria-invalid:shadow-[inset_0_0_0_2px_var(--destructive)]',
+].join(' ')
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<'input'>>(function Input(
+  { className, type, ...props },
+  ref,
+) {
   return (
     <input
+      ref={ref}
       type={type}
       data-slot="input"
-      className={cn(
-        'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-        'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-        'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
-        className,
-      )}
+      className={cn(fieldBase, 'h-11 py-2 file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-medium', className)}
       {...props}
     />
   )
-}
+})
 
 export { Input }

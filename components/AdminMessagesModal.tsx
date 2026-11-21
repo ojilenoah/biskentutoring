@@ -43,7 +43,7 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange} modal={true}>
       <DialogContent 
-        className="sm:max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col !bg-white !backdrop-blur-none !shadow-xl border border-slate-200"
+        className="sm:max-w-[900px] max-h-[90vh] overflow-hidden flex flex-col"
         onPointerDownOutside={(e) => e.preventDefault()}
         onInteractOutside={(e) => e.preventDefault()}
       >
@@ -71,11 +71,11 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-500">Name</p>
+                      <p className="text-sm font-medium text-ink-3">Name</p>
                       <p className="text-lg">{selectedEnrollment.name}</p>
                     </div>
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-500">Email</p>
+                      <p className="text-sm font-medium text-ink-3">Email</p>
                       <div className="flex items-center gap-2">
                         <p className="text-lg">{selectedEnrollment.email}</p>
                         <Button 
@@ -95,7 +95,7 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-500">Phone</p>
+                      <p className="text-sm font-medium text-ink-3">Phone</p>
                       <div className="flex items-center gap-2">
                         <p className="text-lg">{selectedEnrollment.phone}</p>
                         <Button 
@@ -108,14 +108,14 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-500">Subject</p>
+                      <p className="text-sm font-medium text-ink-3">Subject</p>
                       <p className="text-lg">{selectedEnrollment.subject}</p>
                     </div>
                   </div>
                   {selectedEnrollment.message && (
                     <div className="space-y-2">
-                      <p className="text-sm font-medium text-gray-500">Message</p>
-                      <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm font-medium text-ink-3">Message</p>
+                      <div className="bg-sunk p-4 rounded-lg">
                         <p className="whitespace-pre-wrap">{selectedEnrollment.message}</p>
                       </div>
                     </div>
@@ -131,14 +131,14 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
                 </div>
               ) : enrollments.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="text-lg text-gray-500">No enrollment messages yet.</p>
+                  <p className="text-lg text-ink-3">No enrollment messages yet.</p>
                 </div>
               ) : (
                 <div className="space-y-3">
                   {enrollments.map((enrollment) => (
                     <Card 
                       key={enrollment.id} 
-                      className="cursor-pointer hover:bg-gray-50 transition-colors" 
+                      className="cursor-pointer hover:bg-sunk transition-colors" 
                       onClick={() => setSelectedEnrollment(enrollment)}
                     >
                       <CardContent className="p-4">
@@ -148,16 +148,16 @@ export default function AdminMessagesModal({ open, onOpenChange }: Props) {
                               <h3 className="font-semibold text-lg">{enrollment.name}</h3>
                               <Badge variant="outline">{enrollment.subject}</Badge>
                             </div>
-                            <p className="text-gray-600">{enrollment.email}</p>
+                            <p className="text-ink-2">{enrollment.email}</p>
                             {enrollment.message && (
-                              <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+                              <p className="text-sm text-ink-3 mt-1 line-clamp-2">
                                 {enrollment.message.length > 100 
                                   ? `${enrollment.message.substring(0, 100)}...` 
                                   : enrollment.message}
                               </p>
                             )}
                           </div>
-                          <div className="text-right text-sm text-gray-500">
+                          <div className="text-right text-sm text-ink-3">
                             {formatDate(enrollment.created_at)}
                           </div>
                         </div>

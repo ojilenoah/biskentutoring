@@ -3,84 +3,82 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-  /* Soft Aurora: warm cream base, royal purple primary, peach accent atmosphere */
-  --background: oklch(0.975 0.008 80); /* Warm cream (~#FAF6EF) */
-  --foreground: oklch(0.25 0.02 290); /* Deep aubergine-ink for warmth */
-  --card: oklch(0.99 0.005 80); /* Near-ivory card surface */
-  --card-foreground: oklch(0.25 0.02 290);
-  --popover: oklch(0.98 0.006 80);
-  --popover-foreground: oklch(0.25 0.02 290);
-  --primary: oklch(0.5 0.25 300); /* Royal purple */
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.7 0.15 320); /* Soft mauve */
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.955 0.012 70); /* Warm muted tone */
-  --muted-foreground: oklch(0.45 0.02 290);
-  --accent: oklch(0.78 0.12 50); /* Peach accent for aurora warmth */
-  --accent-foreground: oklch(0.25 0.05 290);
-  --destructive: oklch(0.6 0.2 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.91 0.012 80); /* Warm border */
-  --input: oklch(0.97 0.008 80);
-  --ring: oklch(0.5 0.25 300 / 0.5);
-  --chart-1: oklch(0.5 0.25 300); /* Purple chart color */
-  --chart-2: oklch(0.7 0.15 320); /* Light purple chart color */
-  --chart-3: oklch(0.6 0.2 280); /* Purple accent chart color */
-  --chart-4: oklch(0.4 0 0); /* Dark gray chart color */
-  --chart-5: oklch(0.99 0.02 300); /* Light purple chart color */
-  --radius: 0.5rem; /* Rounded corners */
-  --sidebar: oklch(0.99 0.02 300); /* Light purple sidebar */
-  --sidebar-foreground: oklch(0.3 0 0); /* Dark sidebar text */
-  --sidebar-primary: oklch(0.5 0.25 300); /* Purple sidebar primary */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White sidebar primary text */
-  --sidebar-accent: oklch(0.6 0.2 280); /* Purple sidebar accent */
-  --sidebar-accent-foreground: oklch(1 0 0); /* White sidebar accent text */
-  --sidebar-border: oklch(0.9 0.02 300); /* Light purple sidebar border */
-  --sidebar-ring: oklch(0.5 0.25 300 / 0.5); /* Purple sidebar ring */
-}
+/* ==========================================================================
+   BISKEN DESIGN SYSTEM — "Calm structure, soft surfaces"
+   - Warm page, flat borderless cards on a lighter surface.
+   - Crisp 1px ink rules only in structural moments (rail, top bars,
+     section heads, step tables, ruled lists, accordions).
+   - Barely-there rounding: 3 / 4 / 6 / 8 px. No shadows, no blur.
+   - Brand purple is the one loud colour.
+   ========================================================================== */
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+:root {
+  --page: #f3eadb;
+  --card: #fbf7f0;
+  --sunk: #ebe0cc;
+  --ink: #17111f;
+  --ink-2: #3d3449;
+  --ink-3: #5a5066;
+  --purple: oklch(0.5 0.25 300); /* ≈ #7e1cd8, the client's purple */
+  --purple-2: #9246e0;
+  --purple-ink: #f3eaff;
+  --lilac: #e3d6f5;
+  --sage: #cbdccb;
+  --sand: #ecd9b0;
+  --peach: #e8c1aa;
+  --pencil: #f2c14e;
+  /* Structural lines: a hair darker than whatever surface they sit on. */
+  --rule: rgb(23 17 31 / 0.1);
+
+  --radius-tag: 3px;
+  --radius-control: 4px;
+  --radius-card: 6px;
+  --radius-panel: 8px;
+
+  /* shadcn contract */
+  --background: var(--page);
+  --foreground: var(--ink);
+  --card-foreground: var(--ink);
+  --popover: var(--card);
+  --popover-foreground: var(--ink);
+  --primary: var(--purple);
+  --primary-foreground: #ffffff;
+  --secondary: var(--sunk);
+  --secondary-foreground: var(--ink);
+  --muted: var(--sunk);
+  --muted-foreground: var(--ink-3);
+  --accent: var(--lilac);
+  --accent-foreground: var(--ink);
+  --destructive: #c2341f;
+  --destructive-foreground: #ffffff;
+  --border: var(--rule);
+  --input: var(--page);
+  --ring: var(--purple);
+  --radius: var(--radius-card);
 }
 
 @theme inline {
-  --font-sans: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-sunk: var(--sunk);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-purple: var(--purple);
+  --color-purple-2: var(--purple-2);
+  --color-purple-ink: var(--purple-ink);
+  --color-lilac: var(--lilac);
+  --color-sage: var(--sage);
+  --color-sand: var(--sand);
+  --color-peach: var(--peach);
+  --color-pencil: var(--pencil);
+  --color-rule: var(--rule);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
@@ -97,777 +95,152 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
+
+  --radius-tag: var(--radius-tag);
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+  --radius-panel: var(--radius-panel);
+  --radius-sm: var(--radius-tag);
+  --radius-md: var(--radius-control);
+  --radius-lg: var(--radius-card);
+  --radius-xl: var(--radius-panel);
+
+  --animate-marquee: marquee 70s linear infinite;
+  --animate-peek-x: peek-x 9s ease-in-out infinite;
+  --animate-peek-y: peek-y 11s ease-in-out 2s infinite;
+  }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-    /* overflow-x: clip (not hidden) so position: sticky on the navbar isn't broken
-       by an ancestor establishing a scroll containing block. */
-    overflow-x: clip;
-    font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    position: relative;
+  html {
+    scroll-behavior: smooth;
   }
-  /* Ensure section content sits above the fixed aurora layers.
-     Exclude nav so Tailwind's `sticky top-0` keeps working. */
-  main, section, footer { position: relative; z-index: 2; }
-  nav { z-index: 40; }
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+    overflow-x: clip;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--lilac); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
 }
 
-/* Heading styles: Playfair Display for editorial elegance */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+/* Small uppercase mono label */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.display-font {
-  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
-  font-weight: 700;
+/* Same paper grain for coloured panels (keeps their background colour). */
+@utility grain {
+  background-image: url("/brand/grain.png");
+  background-size: 128px 128px;
 }
 
-.display-font-italic {
-  font-family: 'Playfair Display', 'Playfair', Georgia, serif;
-  font-style: italic;
-  font-weight: 700;
-}
-
-/* Italic Playfair + bg-clip-text gets clipped on the LEFT (italic slant) and BOTTOM (descenders)
-   without breathing room. Give the span explicit space so the gradient mask covers the entire glyph. */
-.display-font-italic.bg-clip-text,
-.bg-clip-text {
-  display: inline-block;
-  padding: 0.05em 0.15em 0.2em 0.18em;
-  line-height: 1.2;
-  vertical-align: baseline;
-}
-
-.section-heading {
-  font-style: normal;
-}
-
-/* Supporting / subtitle text — bold Montserrat for personality */
-.support-text {
-  font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.005em;
-}
-
-/* ---------------------------------------------------------------------------
-   AURORA AESTHETIC SYSTEM
-   --------------------------------------------------------------------------- */
-
-/* Layered elevation: purple-tinted ambient + neutral tight + inner highlight */
-.shadow-soft {
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
-    0 1px 2px rgba(15, 12, 41, 0.04),
-    0 8px 24px -4px rgba(91, 33, 182, 0.10);
-}
-.shadow-soft-lg {
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
-    0 2px 6px rgba(15, 12, 41, 0.05),
-    0 20px 48px -12px rgba(91, 33, 182, 0.18),
-    0 8px 16px -8px rgba(255, 153, 102, 0.08);
-}
-.shadow-aurora {
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
-    0 4px 8px rgba(15, 12, 41, 0.04),
-    0 32px 64px -24px rgba(91, 33, 182, 0.28),
-    0 16px 32px -12px rgba(255, 153, 102, 0.12);
-}
-
-/* Full-page ambient aurora — fixed, no animation (static = cheap, no compositor work) */
-.aurora-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  /* Pre-baked gradient soup instead of two blurred radial layers */
-  background:
-    radial-gradient(60vw 60vw at 90% -10%, rgba(168, 85, 247, 0.22), transparent 55%),
-    radial-gradient(50vw 50vw at -10% 115%, rgba(251, 191, 96, 0.20), transparent 55%),
-    radial-gradient(40vw 40vw at 50% 50%, rgba(232, 121, 249, 0.10), transparent 60%);
-}
-
-.aurora-blob {
-  position: absolute;
-  width: 24vw;
-  height: 24vw;
-  border-radius: 50%;
-  filter: blur(40px);
-  opacity: 0.45;
-  pointer-events: none;
-  will-change: auto;
-}
-.aurora-blob-peach {
-  background: radial-gradient(circle, rgba(255, 153, 102, 0.30), transparent 60%);
-}
-.aurora-blob-violet {
-  background: radial-gradient(circle, rgba(167, 139, 250, 0.35), transparent 60%);
-}
-.aurora-blob-mauve {
-  background: radial-gradient(circle, rgba(232, 121, 249, 0.28), transparent 60%);
-}
-
-/* Animation classes intentionally kept as no-ops so existing markup doesn't break */
-.animate-drift { animation: none; }
-
-/* Grain overlay disabled for performance — SVG turbulence repaints on scroll */
-.grain-overlay { display: none; }
-
-/* Glass card — REAL frosted glass: backdrop-filter active, modest blur so it stays performant
-   even with 20+ tiles on screen. Translucent enough to see content warp behind. */
-.glass-card {
-  position: relative;
-  background: rgba(255, 252, 247, 0.55);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 0 rgba(91, 33, 182, 0.05),
-    0 1px 2px rgba(15, 12, 41, 0.03),
-    0 12px 32px -12px rgba(91, 33, 182, 0.14);
-  transition:
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 200ms ease;
-}
-.glass-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(168, 85, 247, 0.3);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
-    0 2px 6px rgba(15, 12, 41, 0.04),
-    0 24px 48px -16px rgba(91, 33, 182, 0.24);
-}
-
-/* Deeper glass — heavier blur for modals + hero card. Only a few on screen. */
-.glass-card-deep {
-  background: rgba(255, 250, 244, 0.5);
-  backdrop-filter: blur(22px) saturate(140%);
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
-    0 4px 12px rgba(15, 12, 41, 0.05),
-    0 24px 56px -16px rgba(91, 33, 182, 0.22);
-}
-
-/* Animated rotating conic gradient border for hero card */
-.gradient-border {
+/* Moving film grain for hero bands: an oversized grain layer jumps between
+   positions in steps. One composited transform, no filters, no repaint. */
+@utility grain-live {
   position: relative;
   isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("/brand/grain.png");
+    background-size: 128px 128px;
+    animation: grain-shift 0.9s steps(6) infinite;
+  }
 }
-.gradient-border::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from 0deg,
-    rgba(168, 85, 247, 0.6),
-    rgba(255, 153, 102, 0.5),
-    rgba(232, 121, 249, 0.55),
-    rgba(168, 85, 247, 0.6)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: spin-slow 12s linear infinite;
-  z-index: -1;
+
+/* Faint drafting grid, for figure panels */
+@utility bg-drafting {
+  background-image:
+    linear-gradient(rgb(23 17 31 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(23 17 31 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* ---- Motion ------------------------------------------------------------ */
+
+@keyframes peek-x {
+  0%, 100% { transform: translateX(70%); }
+  18%, 70% { transform: translateX(0); }
+}
+@keyframes peek-y {
+  0%, 100% { transform: translateY(75%); }
+  20%, 72% { transform: translateY(0); }
+}
+@keyframes bob {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  17% { transform: translate(-5%, 7%); }
+  33% { transform: translate(6%, -4%); }
+  50% { transform: translate(-7%, -6%); }
+  67% { transform: translate(4%, 8%); }
+  83% { transform: translate(-3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 @keyframes spin-slow {
   to { transform: rotate(360deg); }
 }
 
-/* Section dividers removed — sections flow as one continuous surface */
+/* Line-art that draws itself. Add .draw to any stroked path. */
+.draw {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: draw 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.draw-2 { animation-delay: 0.6s; }
+.draw-3 { animation-delay: 1.2s; }
+.rise { opacity: 0; animation: rise 0.5s ease-out forwards; }
+.rise-1 { animation-delay: 0.3s; }
+.rise-2 { animation-delay: 1.5s; }
+.rise-3 { animation-delay: 2.7s; }
+.orbit { transform-box: view-box; transform-origin: 200px 170px; animation: spin-slow 9s linear infinite; }
+.orbit-rev { animation-duration: 13s; animation-direction: reverse; }
 
-/* Magnetic-feel CTA: deeper press, bloom shadow */
-.btn-magnetic {
-  position: relative;
-  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms ease;
-  box-shadow: 0 4px 12px -2px rgba(91, 33, 182, 0.35), 0 2px 4px rgba(91, 33, 182, 0.15);
-}
-.btn-magnetic:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px -4px rgba(91, 33, 182, 0.45), 0 4px 12px rgba(255, 153, 102, 0.20);
-}
-.btn-magnetic:active {
-  transform: translateY(0) scale(0.98);
-  transition-duration: 100ms;
-}
-
-/* Floating chip / pill — REAL glassmorphism; critical for the sticky nav since content
-   scrolls behind it and the user needs to see the warp. */
-.chip-glass {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.75), 0 4px 12px -4px rgba(91, 33, 182, 0.14);
-}
-
-/* Stronger glass pill for section eyebrows */
-.chip-glass-strong {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid rgba(168, 85, 247, 0.18);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
-    0 4px 12px -6px rgba(91, 33, 182, 0.16);
-}
-
-/* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .animate-scroll-infinite,
-  .animate-pulse-glow,
-  .animate-bounce-gentle,
-  .animate-gradient {
-    animation: none !important;
-  }
-}
-
-/* Added custom animations for the tutoring website */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(147, 51, 234, 0.6);
-  }
-}
-
-/* Added new animations for enhanced hero section and infinite scrolling testimonials */
-@keyframes bounce-gentle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes gradient {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes scroll-infinite {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 0.8s ease-out;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.8s ease-out;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.6s ease-out;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-bounce-gentle {
-  animation: bounce-gentle 2s ease-in-out infinite;
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 3s ease infinite;
-}
-
-.animate-scroll-infinite {
-  animation: scroll-infinite 60s linear infinite;
-}
-
-.animate-scroll-infinite:hover {
-  animation-play-state: paused;
-}
-
-/* Added scroll-triggered animation classes */
-.scroll-animate {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-}
-
-.scroll-animate.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.scroll-animate-left {
-  opacity: 0;
-  transform: translateX(-50px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-animate-left.animate {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.scroll-animate-right {
-  opacity: 0;
-  transform: translateX(50px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-animate-right.animate {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.scroll-animate-scale {
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.6s ease-out;
-}
-
-.scroll-animate-scale.animate {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Added testimonial scroll container styles */
-.testimonial-scroll {
-  will-change: transform;
-}
-
-/* Ensuring smooth hover pause functionality */
-.testimonial-scroll:hover {
-  animation-play-state: paused !important;
-}
-
-/* Added smooth scrolling behavior */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Added navigation styles */
-.nav-link {
-  @apply text-sm font-medium transition-colors hover:text-primary;
-}
-
-.nav-link.active {
-  @apply text-primary;
-}
-
-/* Fixed modal styles to avoid Tailwind parsing issues with arbitrary values */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.modal-content {
-  background-color: hsl(var(--card));
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  max-width: 28rem;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-/* Added card stacking animations and modal transitions */
-/* Card stacking animations for hero section (flies left) */
-.card-stack {
-  position: relative;
-  width: 100%;
-  height: 320px; /* Fixed height for consistent image display */
-  perspective: 1000px;
-  overflow: visible; /* Prevent image clipping */
-}
-
-.card-item {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-style: preserve-3d;
-  cursor: pointer;
-  overflow: hidden; /* Ensure images stay within card bounds */
-  border-radius: 1rem; /* Match the image border radius */
-}
-
-.card-item.active {
-  z-index: 4;
-  transform: translateX(0) translateY(0) rotateY(0deg) scale(1);
-}
-
-.card-item.next {
-  z-index: 3;
-  transform: translateX(-15px) translateY(-10px) rotateY(-8deg) scale(0.95);
-}
-
-.card-item.third {
-  z-index: 2;
-  transform: translateX(-25px) translateY(-20px) rotateY(-15deg) scale(0.9);
-}
-
-.card-item.fourth {
-  z-index: 1;
-  transform: translateX(-35px) translateY(-30px) rotateY(-22deg) scale(0.85);
-}
-
-.card-item:not(.active):not(.next):not(.third):not(.fourth) {
-  transform: translateX(-200%) translateY(-50px) rotateY(-45deg) scale(0.7);
-  opacity: 0;
-}
-
-/* Card stacking animations for special care section (flies right) */
-.card-stack-right {
-  position: relative;
-  width: 100%;
-  height: 320px; /* Fixed height for consistent image display */
-  perspective: 1000px;
-  overflow: visible; /* Prevent image clipping */
-}
-
-.card-item-right {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-style: preserve-3d;
-  cursor: pointer;
-  overflow: hidden; /* Ensure images stay within card bounds */
-  border-radius: 1rem; /* Match the image border radius */
-}
-
-.card-item-right.active {
-  z-index: 4;
-  transform: translateX(0) translateY(0) rotateY(0deg) scale(1);
-}
-
-.card-item-right.next {
-  z-index: 3;
-  transform: translateX(15px) translateY(-10px) rotateY(8deg) scale(0.95);
-}
-
-.card-item-right.third {
-  z-index: 2;
-  transform: translateX(25px) translateY(-20px) rotateY(15deg) scale(0.9);
-}
-
-.card-item-right.fourth {
-  z-index: 1;
-  transform: translateX(35px) translateY(-30px) rotateY(22deg) scale(0.85);
-}
-
-.card-item-right:not(.active):not(.next):not(.third):not(.fourth) {
-  transform: translateX(200%) translateY(-50px) rotateY(45deg) scale(0.7);
-  opacity: 0;
-}
-
-/* Smooth modal animations */
-@keyframes modal-overlay-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modal-content-slide-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.animate-modal-overlay {
-  animation: modal-overlay-fade-in 0.3s ease-out;
-}
-
-.animate-modal-content {
-  animation: modal-content-slide-in 0.3s ease-out;
-}
-
-/* Updated testimonials container and card styles to fix text clipping and positioning */
-.testimonial-container {
-  width: 100%;
-  overflow: hidden; /* Hide overflow to prevent page width expansion */
-  position: relative;
-  padding: 2rem 0; /* Increased padding to prevent clipping on hover */
-  mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent); /* Smooth fade at edges */
-  -webkit-mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-}
-
-.testimonial-scroll {
-  display: flex;
-  gap: 1rem;
-  width: fit-content;
-  will-change: transform;
-  overflow: visible; /* Allow cards to show hover effects */
-}
-
-.testimonial-card {
-  width: 300px; /* Increased width for better text display */
-  height: 160px; /* Increased height to accommodate text properly */
-  flex-shrink: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Improved testimonial card content layout to prevent text clipping */
-.testimonial-card .card-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Changed from space-between to flex-start */
-  padding: 1rem; /* Increased padding for better text spacing */
-  overflow: visible; /* Changed from hidden to visible to prevent text clipping */
-}
-
-/* Fixed testimonial text layout to display properly within cards */
-.testimonial-card h4 {
-  font-size: 0.875rem;
-  line-height: 1.3;
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-  color: hsl(var(--foreground));
-}
-
-.testimonial-card .text-xs {
-  font-size: 0.75rem;
-  margin-bottom: 0.75rem;
-  color: hsl(var(--muted-foreground));
-}
-
-.testimonial-card p {
-  font-size: 0.875rem; /* Increased font size for better readability */
-  line-height: 1.4;
-  color: hsl(var(--muted-foreground));
-  flex: 1;
-  overflow: visible; /* Removed clipping to show full text */
-  display: block; /* Changed from -webkit-box to block */
-}
-
-/* Ensure all images have consistent dimensions */
-.card-item img,
-.card-item-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-/* Responsive adjustments for better mobile testimonial display */
-@media (max-width: 768px) {
-  .card-stack,
-  .card-stack-right {
-    height: 280px;
-    overflow: visible;
-  }
-
-  .testimonial-card {
-    width: 260px; /* Adjusted mobile width */
-    height: 140px; /* Adjusted mobile height */
-  }
-
-  .testimonial-container {
-    padding: 1.5rem 0; /* Adjusted mobile padding */
-  }
-
-  .testimonial-card .card-content {
-    padding: 0.75rem; /* Reduced mobile padding */
-  }
-
-  .testimonial-card p {
-    font-size: 0.8rem; /* Slightly smaller mobile text */
-    line-height: 1.3;
-  }
-
-  .card-item.next,
-  .card-item-right.next {
-    transform: translateX(-10px) translateY(-8px) rotateY(-5deg) scale(0.96);
-  }
-
-  .card-item.third,
-  .card-item-right.third {
-    transform: translateX(-18px) translateY(-15px) rotateY(-10deg) scale(0.92);
-  }
-
-  .card-item.fourth,
-  .card-item-right.fourth {
-    transform: translateX(-25px) translateY(-22px) rotateY(-15deg) scale(0.88);
-  }
-}
-
-/* Added new testimonial review card styles for rectangular Amazon/Airbnb-style cards */
-.testimonial-container-new {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  padding: 0.5rem 0;
-  mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-  -webkit-mask: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
-}
-
-.testimonial-scroll-new {
-  display: flex;
-  gap: 1.5rem;
-  width: fit-content;
-  will-change: transform;
-  overflow: visible;
-}
-
-.testimonial-review-card {
-  width: 270px;
-  flex-shrink: 0;
-}
-
-/* Responsive adjustments for new testimonial cards */
-@media (max-width: 768px) {
-  .testimonial-review-card {
-    width: 250px;
-  }
-
-  .testimonial-scroll-new {
-    gap: 1rem;
-  }
-
-  .testimonial-container-new {
-    padding: 0.25rem 0;
-  }
-}
-
-@media (max-width: 640px) {
-  .testimonial-review-card {
-    width: 230px;
-  }
-}
-
-/* Added scrollbar hide utility class for tutors section */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  .draw { stroke-dashoffset: 0; }
+  .rise { opacity: 1; }
 }
