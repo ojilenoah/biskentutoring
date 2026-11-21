@@ -26,9 +26,9 @@ export function TutorDirectory() {
 
   return (
     <>
-      <div className="relative mt-6 flex flex-col gap-1.5 rounded-card bg-card p-1.5 md:mt-24 md:flex-row">
+      <div className="relative mt-24 flex flex-col gap-1.5 rounded-card bg-card p-1.5 md:flex-row">
         {/* crayons poke up from behind the bar's top edge */}
-        <div aria-hidden="true" className="pointer-events-none absolute bottom-full right-10 hidden h-[88px] w-[170px] [clip-path:inset(-300px_-300px_0_-300px)] md:block">
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-full right-4 h-[88px] w-[170px] [clip-path:inset(-300px_-300px_0_-300px)] sm:right-10">
           <Drift className="absolute left-8 top-1" distance={8} spin={8} from={{ y: 90 }} style={{ transformOrigin: "50% 100%" }}>
             <CrayonsUp className="w-[104px] origin-bottom rotate-[18deg]" />
           </Drift>

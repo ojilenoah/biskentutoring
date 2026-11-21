@@ -51,7 +51,6 @@ export function TutorCard({ tutor, square = false }: { tutor: TutorEntry; square
         <h3 className="break-words text-[15px] leading-tight tracking-[-0.01em] sm:text-[17px] lg:text-[18px]">{tutor.name}</h3>
         <p className="mt-1 line-clamp-2 text-[12px] leading-snug text-ink-2 sm:mt-1.5 sm:text-[13.5px]">{tutor.tags.join(" · ")}</p>
         <span className="mt-auto flex items-center justify-between gap-2 pt-3 text-[13px] font-medium sm:pt-4 sm:text-[13.5px]">
-          <span className="hidden font-mono text-[11px] font-normal text-ink-3 sm:inline">TRCN</span>
           <span className="inline-flex w-full items-center justify-center gap-1.5 rounded-control bg-page px-3 py-1.5 transition-colors group-hover:bg-lilac sm:w-auto">
             View <ArrowRight className="size-3.5" />
           </span>

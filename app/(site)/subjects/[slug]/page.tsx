@@ -28,7 +28,7 @@ export default function SubjectPage({ params }: { params: { slug: string } }) {
   const teachers = tutorsFor(family)
 
   return (
-    <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 p-4 sm:p-5 lg:grid-cols-2">
       {/* drawing panel */}
       <div className="flex flex-col rounded-panel bg-purple grain lg:min-h-[calc(100dvh-104px)]">
         <div className="flex justify-between border-b-2 border-rule px-6 py-4 font-mono text-[11.5px] tracking-[0.08em] text-purple-ink">

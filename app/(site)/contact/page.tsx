@@ -36,8 +36,8 @@ export default function ContactPage() {
         <SectionHead as="h1" eyebrow="Contact" title="Get in touch" />
         <p className="max-w-xl text-lg text-ink-2">Reach out for enrollment, questions, or to schedule a trial session.</p>
 
-        <div className="relative mt-10 grid gap-3 md:grid-cols-3">
-          <Drift className="pointer-events-none absolute -top-9 left-[22%] z-10 hidden md:block" distance={6} from={{ y: -40, rotate: -30 }}>
+        <div className="relative mt-10 grid grid-cols-1 gap-3 md:grid-cols-3">
+          <Drift className="pointer-events-none absolute -top-9 left-[40%] z-10 md:left-[22%]" distance={6} from={{ y: -40, rotate: -30 }}>
             <PaperClip className="w-[36px] rotate-[10deg]" />
           </Drift>
           {CHANNELS.map((c) => (
@@ -60,7 +60,7 @@ export default function ContactPage() {
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-4 rounded-card bg-card p-5">
           <p className="text-[15px] text-ink-2">Prefer to fill in a form? Tell us about your child and the subjects you need.</p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <CopyEmail />
             <Button asChild>
               <Link href="/enroll">

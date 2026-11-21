@@ -16,14 +16,14 @@ export default function TutorsPage() {
         cells={[
           <Breadcrumb key="b" items={[{ label: "Home", href: "/" }, { label: "Find a tutor" }]} />,
           <span key="c">Online &amp; at home</span>,
-          <span key="t">TRCN certified</span>,
+          <span key="t">1-to-1 &amp; groups</span>,
         ]}
       />
       <div className={cn(gutter, "pb-20 pt-8 sm:pt-12")}>
         <div className="flex items-end justify-between gap-6 border-b-2 border-rule pb-6">
           <div>
             <h1 className="text-[44px] sm:text-[64px]">Find a tutor</h1>
-            <p className="mt-4 max-w-[440px] text-ink-2">Search by name or filter by subject. Every tutor is TRCN certified.</p>
+            <p className="mt-4 max-w-[440px] text-ink-2">Search by name or filter by subject.</p>
           </div>
         </div>
         <TutorDirectory />

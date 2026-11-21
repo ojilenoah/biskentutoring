@@ -30,7 +30,7 @@ export default function HowItWorksPage() {
       <div className={cn(gutter, "pb-20 pt-8 sm:pt-12")}>
         <SectionHead as="h1" eyebrow="How it works" title="From first message to first lesson" />
 
-        <section className="grid gap-6 rounded-panel bg-purple grain p-5 text-white sm:p-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
+        <section className="grid grid-cols-1 gap-6 rounded-panel bg-purple grain p-5 text-white sm:p-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <div className="relative hidden min-h-[360px] place-items-center rounded-card bg-purple-2 lg:grid">
             <Drift className="grid w-[48%] max-w-[220px] place-items-center" distance={16} from={{ y: 40 }}>
               <Backpack className="w-full" />
@@ -60,7 +60,7 @@ export default function HowItWorksPage() {
 
         <section className="pt-20">
           <SectionHead eyebrow="What we offer" title="Lesson formats" />
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {services.map((s, i) => (
               <article key={s.title} className={cn("grain flex flex-col rounded-card p-6", TINTS[i % TINTS.length])}>
                 <div className="flex items-start justify-between">

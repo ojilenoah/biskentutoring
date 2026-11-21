@@ -29,8 +29,8 @@ export default function AboutPage() {
       <PageBar
         cells={[
           <Breadcrumb key="b" items={[{ label: "Home", href: "/" }, { label: "About" }]} />,
-          <span key="t">TRCN certified</span>,
-          <span key="q">BSc.Ed / M.Ed</span>,
+          <span key="t">Pre-school to A-level</span>,
+          <span key="q">Online &amp; at home</span>,
         ]}
       />
       <div className={cn(gutter, "pb-20 pt-8 sm:pt-12")}>
@@ -41,7 +41,7 @@ export default function AboutPage() {
         </p>
 
         {/* lead tutor */}
-        <section className="mt-14 grid gap-4 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+        <section className="mt-14 grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <Link href={`/tutors/${lead.slug}`} className={cn("group relative grid place-items-center rounded-panel p-8", lead.tint)}>
             <TutorPhoto tutor={lead} priority className="aspect-[4/5] w-full max-w-[340px] rounded-card" />
           </Link>
@@ -62,9 +62,9 @@ export default function AboutPage() {
         </section>
 
         {/* specialised support */}
-        <section className="relative pt-20 lg:pb-24">
+        <section className="relative pb-24 pt-20">
           <SectionHead eyebrow="Inclusive approach" title="Specialised support for every child" />
-          <div className="grid gap-8 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <p className="max-w-xl text-lg leading-relaxed text-ink-2">
               We provide specialised support for children with <strong className="font-semibold text-ink">learning differences</strong>. Our
               qualified teachers use evidence-based approaches to create supportive learning environments tailored to each child&apos;s unique
@@ -82,9 +82,9 @@ export default function AboutPage() {
               ))}
             </ul>
           </div>
-          <div aria-hidden="true" className="pointer-events-none absolute bottom-6 hidden lg:block" style={{ right: "calc((100% - 100vw) / 2)" }}>
+          <div aria-hidden="true" className="pointer-events-none absolute bottom-6" style={{ right: "calc((100% - 100vw) / 2)" }}>
             <Drift axis="x" distance={22} from={{ x: 160 }}>
-              <Ruler className="w-[220px] translate-x-[30%] rotate-[10deg]" />
+              <Ruler className="w-[150px] translate-x-[30%] rotate-[10deg] lg:w-[220px]" />
             </Drift>
           </div>
         </section>

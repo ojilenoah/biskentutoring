@@ -151,7 +151,7 @@ function DashboardInner() {
           <p className="mt-3 text-lg text-ink-2">{copy.lede}</p>
         </div>
 
-        <div className="mt-6 grid gap-3 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-3 lg:grid-cols-3">
           <section className="relative overflow-hidden rounded-panel bg-card p-6 sm:p-7 lg:col-span-2">
             <p className="eyebrow !text-[11px] text-ink-3">{user.role === "tutor" ? "Your students" : "Next lesson"}</p>
             <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
@@ -175,7 +175,7 @@ function DashboardInner() {
                 </a>
               </Button>
             </div>
-            <Drift className="pointer-events-none absolute -right-2 bottom-4 hidden sm:block" axis="x" distance={8} spin={8} from={{ x: 60 }}>
+            <Drift className="pointer-events-none absolute -right-2 bottom-4" axis="x" distance={8} spin={8} from={{ x: 60 }}>
               <Pencil className="w-[18px] rotate-[60deg]" />
             </Drift>
           </section>
@@ -213,7 +213,7 @@ function DashboardInner() {
 
           <section className="rounded-panel bg-card p-6 sm:p-7 lg:col-span-2">
             <p className="eyebrow !text-[11px] text-ink-3">{user.role === "tutor" ? "Subjects you can teach" : "Explore subjects"}</p>
-            <div className="mt-5 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-3">
               {families.map((f) => (
                 <Link key={f.slug} href={`/subjects/${f.slug}`} className={cn("grain flex items-center gap-3 rounded-card p-3", f.tint)}>
                   <span className="min-w-0">

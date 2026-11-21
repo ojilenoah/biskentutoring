@@ -32,8 +32,8 @@ export function MobileBar() {
         <Link href="/" aria-label="Bisken home">
           <Logo />
         </Link>
-        <Button variant="surface" size="sm" onClick={() => setOpen(true)} aria-expanded={open} className="font-mono text-xs tracking-[0.08em]">
-          INDEX <Menu />
+        <Button variant="surface" size="icon" onClick={() => setOpen(true)} aria-expanded={open} aria-label="Open menu">
+          <Menu className="size-5" />
         </Button>
       </header>
 

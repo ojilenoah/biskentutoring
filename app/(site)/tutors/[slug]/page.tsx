@@ -50,7 +50,7 @@ export default function TutorProfilePage({ params }: { params: { slug: string } 
       body: lead ? (
         <p>BSc.Ed · M.Ed · MAID · TRCN · STAN. Principal Education Officer with over a decade of professional practice.</p>
       ) : (
-        <p>All Bisken tutors are TRCN certified educators.</p>
+        <p>Ask us about this tutor&apos;s qualifications and experience when you enroll.</p>
       ),
     },
     {
@@ -79,16 +79,16 @@ export default function TutorProfilePage({ params }: { params: { slug: string } 
               Next <ArrowRight className="size-3.5" />
             </Link>
           </span>,
-          <span key="i">TRCN certified</span>,
+          <span key="i">1-to-1 &amp; groups</span>,
         ]}
       />
 
-      <div className={cn(gutter, "grid gap-4 pb-20 pt-6 lg:grid-cols-2")}>
+      <div className={cn(gutter, "grid grid-cols-1 gap-4 pb-20 pt-6 lg:grid-cols-2")}>
         {/* photo panel */}
         <div className={cn("group relative flex items-center justify-center rounded-panel p-6 sm:p-10 lg:min-h-[720px]", tutor.tint)}>
           {/* clip grips the photo's top edge: part over the photo, part sticking out above it */}
           <div className="relative w-full max-w-[420px]">
-            <Drift className="pointer-events-none absolute -top-14 left-12 z-10 hidden sm:block" distance={6} from={{ y: -40, rotate: 30 }}>
+            <Drift className="pointer-events-none absolute -top-14 left-8 z-10 sm:left-12" distance={6} from={{ y: -40, rotate: 30 }}>
               <PaperClip className="w-[52px] -rotate-[14deg]" />
             </Drift>
             <TutorPhoto tutor={tutor} priority className="aspect-[4/5] w-full rounded-card" />
@@ -110,7 +110,6 @@ export default function TutorProfilePage({ params }: { params: { slug: string } 
                   {t}
                 </span>
               ))}
-              <span className="rounded-tag bg-page px-2.5 py-1 text-[13px] font-medium">TRCN certified</span>
             </div>
             <div className="mt-7 flex gap-2">
               <Button asChild size="lg" className="flex-1 sm:flex-none">

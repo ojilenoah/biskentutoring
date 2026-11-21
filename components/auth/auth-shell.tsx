@@ -16,7 +16,7 @@ export function AuthShell({
   aside: { eyebrow: string; title: React.ReactNode; quote: string; author: string; role: string; image: string }
 }) {
   return (
-    <div className="grid min-h-dvh lg:grid-cols-[1fr_1.05fr]">
+    <div className="grid grid-cols-1 min-h-dvh lg:grid-cols-[1fr_1.05fr]">
       <div className="flex flex-col">
         <div className="flex items-center justify-between border-b-2 border-rule px-5 py-3.5 sm:px-8">
           <Link href="/" aria-label="Bisken home">
@@ -60,8 +60,8 @@ export function AuthShell({
           </div>
 
           <div className="grid grid-cols-3 border-t-2 border-rule font-mono text-[10.5px] tracking-[0.06em] text-purple-ink">
-            <span className="border-r-2 border-rule px-5 py-3">TRCN CERTIFIED</span>
-            <span className="border-r-2 border-rule px-5 py-3">BSc.Ed / M.Ed</span>
+            <span className="border-r-2 border-rule px-5 py-3">1-TO-1 &amp; GROUPS</span>
+            <span className="border-r-2 border-rule px-5 py-3">PRE-SCHOOL TO A-LEVEL</span>
             <span className="px-5 py-3">ONLINE &amp; AT HOME</span>
           </div>
           <Drift className="pointer-events-none absolute -right-24 top-1/2 hidden xl:block" axis="x" distance={14} from={{ x: 120 }}>

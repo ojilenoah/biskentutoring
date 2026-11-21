@@ -94,7 +94,7 @@ export function EnrollForm() {
       <Field id="name" label="Parent or student name" error={errors.name?.message}>
         <Input id="name" autoComplete="name" placeholder="Ada Okafor" aria-invalid={!!errors.name} {...register("name")} />
       </Field>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field id="email" label="Email" error={errors.email?.message}>
           <Input id="email" type="email" autoComplete="email" placeholder="you@example.com" aria-invalid={!!errors.email} {...register("email")} />
         </Field>

@@ -62,7 +62,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-5 flex flex-col gap-1 border-t border-page/15 pt-5 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Bisken Tutoring Concepts. All rights reserved.</p>
-          <p className="font-mono tracking-[0.08em] text-page/50">TRCN CERTIFIED · BSc.Ed / M.Ed QUALIFIED</p>
+          <p className="font-mono tracking-[0.08em] text-page/50">PRE-SCHOOL TO A-LEVEL · ONLINE &amp; AT HOME</p>
         </div>
       </div>
     </footer>

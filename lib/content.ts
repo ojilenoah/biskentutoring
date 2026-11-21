@@ -315,14 +315,14 @@ export const STEPS = [
  * flat along the bottom) into public/kids/ and list them here, e.g.
  *   { src: "/kids/girl.png", alt: "" }
  */
-export const HERO_KIDS: { src: string; alt: string; height: string; tilt: string }[] = [
-  { src: "/kids/girl-books.webp", alt: "", height: "h-[280px] lg:h-[380px]", tilt: "-rotate-[4deg]" },
-  { src: "/kids/boy-thumbs-up.webp", alt: "", height: "h-[230px] lg:h-[320px]", tilt: "rotate-[5deg]" },
+export const HERO_KIDS: { src: string; alt: string; height: string; tilt: string; mobileHeight: string }[] = [
+  { src: "/kids/girl-books.webp", alt: "", height: "h-[280px] lg:h-[380px]", tilt: "-rotate-[4deg]", mobileHeight: "h-[280px]" },
+  { src: "/kids/boy-thumbs-up.webp", alt: "", height: "h-[230px] lg:h-[320px]", tilt: "rotate-[5deg]", mobileHeight: "h-[230px]" },
 ]
 
 /** Cut-out rising out of the "How it works" card; its head breaks out over the top. */
 export const HOW_KIDS: { src: string; alt: string; height: string; center?: boolean }[] = [
-  { src: "/kids/boy-notebook.webp", alt: "", height: "h-[660px]", center: true },
+  { src: "/kids/boy-notebook.webp", alt: "", height: "h-[440px] lg:h-[660px]", center: true },
 ]
 
 /** Cut-out that peeks into the closing call-to-action card. */

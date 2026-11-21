@@ -33,18 +33,18 @@ export default function HomePage() {
       {/* ================= HERO: its own coloured band ================= */}
       <div className="grain relative overflow-hidden rounded-b-[10px] bg-lilac">
         <div className={gutter}>
-          <section className="relative flex flex-col items-center justify-center pb-8 lg:min-h-[calc(100dvh-96px)] lg:pb-0">
+          <section className="relative flex flex-col items-center justify-center lg:min-h-[calc(100dvh-96px)]">
             <div className="relative z-10 mx-auto flex max-w-[820px] flex-col items-center pb-6 pt-10 text-center sm:pt-14 lg:pb-10 lg:pt-0">
               <h1 className="text-[32px] leading-[1.05] sm:text-[50px] xl:text-[60px]">
                 Unlock your child&apos;s{" "}
-                <span className="relative inline-block whitespace-nowrap">
-                  potential
-                  <ScribbleCircle className="absolute -inset-x-[10%] -inset-y-[22%] h-[144%] w-[120%]" />
+                <span className="relative inline-block whitespace-nowrap text-[#d9690f]">
+                  <span className="relative z-10">potential</span>
+                  <ScribbleCircle className="absolute -inset-x-[14%] -inset-y-[24%] z-0 h-[148%] w-[128%] max-w-none" />
                 </span>{" "}
                 with <span className="text-purple">expert tutors.</span>
               </h1>
               <p className="mt-5 max-w-[480px] text-[15.5px] text-ink-2 sm:mt-6 sm:text-[17px]">
-                Personalised one-to-one tutoring that builds confidence and delivers results — trusted by over 100 families.
+                Tutoring that builds confidence and delivers results, trusted by over 100 families.
               </p>
               <div className="mt-7 flex w-full justify-center gap-2 sm:w-auto">
                 <Button asChild size="lg" className="flex-1 sm:flex-none">
@@ -59,16 +59,19 @@ export default function HomePage() {
   
             </div>
   
-            <HeroFigure className="relative z-0 min-h-[300px] w-full lg:absolute lg:-right-[12%] lg:-top-24 lg:min-h-0 lg:w-[58%] lg:-rotate-12 lg:opacity-35" />
+            {/* phones/tablets: kids first, then the drawings */}
+            <HeroFigure kids={HERO_KIDS} className="relative z-0 h-[215px] w-full lg:hidden" />
+            {/* desktop: faint drawings tucked into the top-right corner */}
+            <HeroFigure className="hidden lg:absolute lg:-right-[12%] lg:-top-24 lg:z-0 lg:flex lg:w-[58%] lg:-rotate-12 lg:opacity-35" />
   
             {/* ruler slides in from the page's left edge, below the buttons */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute bottom-10 hidden lg:block"
+              className="pointer-events-none absolute bottom-6 z-10 lg:bottom-10"
               style={{ left: "calc((100% - 100vw) / 2)" }}
             >
               <Drift axis="x" distance={8} spin={7} from={{ x: -120 }}>
-                <Ruler className="w-[220px] -translate-x-[66%] -rotate-45" />
+                <Ruler className="w-[150px] -translate-x-[66%] -rotate-45 lg:w-[220px]" />
               </Drift>
             </div>
   
@@ -77,7 +80,7 @@ export default function HomePage() {
 
         {/* kid cut-outs rise from the band's bottom-right edge (add files in lib/content.ts HERO_KIDS) */}
         {HERO_KIDS.length > 0 && (
-          <div className="pointer-events-none absolute -bottom-12 right-[2%] z-20 hidden items-end md:flex">
+          <div className="pointer-events-none absolute -bottom-12 right-[2%] z-20 hidden items-end lg:flex">
             {HERO_KIDS.map((k, i) => (
               <Drift key={k.src} distance={8} from={{ y: 340 }} className={i > 0 ? "-ml-8" : ""}>
                 <img src={k.src} alt={k.alt} className={cn("block w-auto origin-bottom select-none", k.height, k.tilt)} draggable={false} />
@@ -104,7 +107,7 @@ export default function HomePage() {
             }
           />
           <div className="relative grid auto-rows-[124px] grid-cols-2 gap-2 sm:auto-rows-[150px] sm:grid-cols-4 sm:gap-3">
-            <Drift className="pointer-events-none absolute -top-9 left-[68%] z-10 hidden sm:block" distance={6} from={{ y: -40, rotate: -30 }}>
+            <Drift className="pointer-events-none absolute -top-9 left-[68%] z-10" distance={6} from={{ y: -40, rotate: -30 }}>
               <PaperClip className="w-[36px] rotate-[12deg]" />
             </Drift>
             <Link
@@ -144,9 +147,9 @@ export default function HomePage() {
 
         {/* ================= HOW IT WORKS (purple panel) ================= */}
         <section className="grain relative left-1/2 mt-12 w-screen -translate-x-1/2 bg-purple text-white">
-          <div className="mx-auto grid max-w-[1320px] gap-6 px-4 py-8 sm:px-7 sm:py-12 lg:grid-cols-2">
+          <div className="mx-auto grid grid-cols-1 max-w-[1320px] gap-6 px-4 py-8 sm:px-7 sm:py-12 lg:grid-cols-2">
           {/* clip only the bottom edge: kids rise out of it, and the tallest one breaks out over the top */}
-          <div className="relative hidden min-h-[400px] rounded-card bg-purple-2 [clip-path:inset(-900px_-60px_0_-60px_round_0_0_var(--radius-card)_var(--radius-card))] lg:block">
+          <div className="relative mt-16 min-h-[320px] rounded-card bg-purple-2 [clip-path:inset(-900px_-60px_0_-60px_round_0_0_var(--radius-card)_var(--radius-card))] lg:mt-0 lg:min-h-[400px]">
             <div className="pointer-events-none absolute inset-x-0 -bottom-10 flex items-end justify-center">
               {HOW_KIDS.map((k, i) => (
                 <Drift
@@ -174,14 +177,11 @@ export default function HomePage() {
                 </li>
               ))}
             </ol>
-            <p className="mt-auto border-t-2 border-rule py-4 text-[20px] font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[24px]">
-              Every tutor is TRCN certified and BSc.Ed / M.Ed qualified.
-            </p>
-            <div className="grid grid-cols-[1fr_auto] border-y-2 border-rule font-mono text-xs">
+            <div className="mt-auto grid grid-cols-[1fr_auto] border-y-2 border-rule font-mono text-xs">
               <span className="py-2.5">Bisken Tutoring Concepts</span>
               <span className="border-l-2 border-rule py-2.5 pl-4">{new Date().getFullYear()}</span>
             </div>
-            <Button asChild variant="surface" className="mt-5 self-start">
+            <Button asChild variant="surface" className="mt-5 self-end lg:self-start">
               <Link href="/how-it-works">
                 More about how it works <ArrowRight />
               </Link>
@@ -205,7 +205,7 @@ export default function HomePage() {
           />
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {featured.map((t) => (
-              <TutorCard key={t.slug} tutor={t} />
+              <TutorCard key={t.slug} tutor={t} square />
             ))}
           </div>
         </section>
@@ -217,12 +217,12 @@ export default function HomePage() {
         </section>
 
         {/* ================= CTA ================= */}
-        <section className="relative mb-2 flex flex-col justify-center gap-6 rounded-panel bg-sunk grain p-6 sm:p-10 md:mt-16 md:min-h-[290px] md:pr-[300px] lg:min-h-[330px] lg:p-12 lg:pr-[340px]">
+        <section className="relative mb-2 mt-12 flex flex-col justify-center gap-6 rounded-panel bg-sunk grain p-6 pb-[280px] sm:p-10 sm:pb-[300px] md:mt-16 md:min-h-[290px] md:pb-10 md:pr-[300px] lg:min-h-[330px] lg:p-12 lg:pr-[340px]">
           {/* kid stands flush to the card's right edge; her head rises out above the top and
               her cut-off bottom always sits below the card's bottom edge, which clips it */}
-          <div className="pointer-events-none absolute inset-0 hidden [clip-path:inset(-600px_0_0_0_round_0_0_var(--radius-panel)_var(--radius-panel))] md:block">
+          <div className="pointer-events-none absolute inset-0 [clip-path:inset(-600px_0_0_0_round_0_0_var(--radius-panel)_var(--radius-panel))]">
             <Drift className="absolute -bottom-10 right-0" distance={6} from={{ y: 60 }}>
-              <img src={CTA_KID.src} alt={CTA_KID.alt} className="block h-[390px] w-auto select-none lg:h-[440px]" draggable={false} />
+              <img src={CTA_KID.src} alt={CTA_KID.alt} className="block h-[300px] w-auto select-none md:h-[390px] lg:h-[440px]" draggable={false} />
             </Drift>
           </div>
           <h2 className="relative text-[36px] sm:text-[52px]">

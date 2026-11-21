@@ -11,8 +11,13 @@ const DURATION = 6000
  * another, straight on the hero surface. Cycles on its own; remounting each
  * scene (key) restarts its CSS draw animations.
  */
-export function HeroFigure({ className }: { className?: string }) {
+type Kid = { src: string; alt: string; tilt?: string; mobileHeight?: string }
+
+export function HeroFigure({ className, kids }: { className?: string; kids?: Kid[] }) {
+  // With kids, the cut-outs are the first scene (shown on first load), then the drawings.
+  const scenes = kids?.length ? (["Kids", ...SCENES] as const) : SCENES
   const [scene, setScene] = useState(0)
+  const draw = kids?.length ? scene - 1 : scene
   const [still, setStill] = useState(false)
 
   useEffect(() => {
@@ -21,25 +26,44 @@ export function HeroFigure({ className }: { className?: string }) {
 
   useEffect(() => {
     if (still) return
-    const t = setTimeout(() => setScene((s) => (s + 1) % SCENES.length), DURATION)
+    const t = setTimeout(() => setScene((s) => (s + 1) % scenes.length), DURATION)
     return () => clearTimeout(t)
-  }, [scene, still])
+  }, [scene, still, scenes.length])
 
   return (
     <figure className={cn("relative flex flex-col items-center justify-center", className)}>
+      {draw < 0 && kids ? (
+        <div key="kids" className="absolute inset-x-0 bottom-0 flex items-end justify-center" aria-label="Students" role="img">
+          {kids.map((k, i) => (
+            <img
+              key={k.src}
+              src={k.src}
+              alt={k.alt}
+              draggable={false}
+              className={cn(
+                "rise block w-auto origin-bottom translate-y-[14%] select-none",
+                i > 0 && "-ml-6",
+                k.mobileHeight ?? "h-[260px]",
+                k.tilt,
+              )}
+              style={{ animationDelay: `${i * 0.15}s` }}
+            />
+          ))}
+        </div>
+      ) : (
       <svg
         key={scene}
         viewBox="0 0 400 340"
         role="img"
-        aria-label={`Line drawing: ${SCENES[scene]}`}
-        className="w-[88%] max-w-[540px] overflow-visible"
+        aria-label={`Line drawing: ${SCENES[draw]}`}
+        className="max-h-[190px] w-auto max-w-[88%] overflow-visible lg:max-h-none lg:w-[88%] lg:max-w-[540px]"
         fill="none"
         stroke="var(--ink)"
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        {scene === 0 && (
+        {draw === 0 && (
           <g>
             <path className="draw" d="M120 250 L280 250 L120 130 Z" />
             <path className="draw draw-2" d="M120 250 L280 250 L280 290 L120 290 Z" stroke="var(--purple)" />
@@ -56,7 +80,7 @@ export function HeroFigure({ className }: { className?: string }) {
             </text>
           </g>
         )}
-        {scene === 1 && (
+        {draw === 1 && (
           <g fill="var(--ink)" stroke="none" fontFamily="var(--font-sans)" fontWeight="600">
             <text className="rise rise-1" x="90" y="110" fontSize="40">2x + 6 = 14</text>
             <text className="rise rise-2" x="90" y="180" fontSize="40">2x = 8</text>
@@ -65,7 +89,7 @@ export function HeroFigure({ className }: { className?: string }) {
             <text className="rise rise-3" x="250" y="248" fontSize="12" fontWeight="400" fontFamily="var(--font-mono)" fill="var(--ink-3)">÷ 2</text>
           </g>
         )}
-        {scene === 2 && (
+        {draw === 2 && (
           <g>
             <circle className="draw" cx="200" cy="170" r="16" fill="var(--lilac)" />
             <g className="orbit">
@@ -84,7 +108,7 @@ export function HeroFigure({ className }: { className?: string }) {
             </text>
           </g>
         )}
-        {scene === 3 && (
+        {draw === 3 && (
           <g>
             <text className="rise rise-1" x="188" y="52" fill="var(--purple)" stroke="none" fontFamily="var(--font-mono)" fontSize="15">S</text>
             <path className="draw" d="M194 60 L120 120 M200 60 L280 120" />
@@ -103,6 +127,7 @@ export function HeroFigure({ className }: { className?: string }) {
           </g>
         )}
       </svg>
+      )}
 
     </figure>
   )
